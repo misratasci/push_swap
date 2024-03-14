@@ -2,7 +2,7 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-SRCS = main.c utils.c libft/ft_atoi.c
+SRCS = main.c utils.c operations.c libft/ft_atoi.c libft/ft_putendl_fd.c
 
 all:
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS)
