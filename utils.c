@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 14:25:35 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 16:18:38 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,46 @@ int	find_min(int *a, int size)
 	return (min);
 }
 
+int	find_min_ind(int *a, int size)
+{
+	int	i;
+	int	min;
+	int	ind;
+
+	if (!a || size < 1)
+		return (-1);
+	min = a[0];
+	ind = 0;
+	i = -1;
+	while (++i < size)
+	{
+		if (a[i] < min)
+		{
+			min = a[i];
+			ind = i;
+		}
+	}
+	return (ind);
+}
+
 int	abs(int a)
 {
 	if (a < 0)
 		return (-a);
 	return (a);
+}
+
+int	distance(int ind1, int ind2, int size)
+{
+	int diff;
+
+	diff = abs(ind1 - ind2);	
+	if (diff < size / 2)
+	{
+		return (diff);
+	}
+	else
+		return (diff - size);
 }
 
 int	find_middle(int *a, int size) //bunsuz da deneyebilirsin

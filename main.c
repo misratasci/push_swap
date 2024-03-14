@@ -6,52 +6,88 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 14:13:46 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 17:21:18 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort(stack *a, stack *b)
+void	rotate_to_top(stack *a, int ind)
 {
-	int i;
-	int	size;
-	int	j;
-
-	size = b->size;
-	if (a->size > b->size)
-		size = a->size;
-	j = -1;
-	while (++j < size - 1)
+	int	i;
+	
+	if (ind < a->size / 2)
 	{
 		i = -1;
-		while (++i < size - j)
+		while (++i <= ind)
 		{
-			if (a->top > a->arr[a->size - 2] && b->top > b->arr[b->size - 2])
+			revr(a);
+			ft_putendl_fd("rra", 1);
+		}
+	}
+	else if (ind >= a->size / 2 && ind != a->size - 1)
+	{
+		i = -1;
+		while (++i < a->size - ind - 1)
+		{
+			r(a);
+			ft_putendl_fd("ra", 1);
+		}
+	}
+}
+
+void	sort(stack *a)
+{
+	int	min_ind;
+	int	min_ind2;
+	int	i;
+	int	j;
+
+	min_ind = find_min_ind(a->arr, a->size);
+	rotate_to_top(a, min_ind);
+	printf("rotate to top min_ind\n");
+	print_arr(a->arr, a->size);
+	j = -1;
+	while (++j < 2)
+	{
+		printf("j: %d\n", j);
+		min_ind2 = find_min_ind(a->arr, a->size - j - 1);
+		printf("min_ind2: %d\n", min_ind2);
+		rotate_to_top(a, min_ind2);
+		printf("rotate to top min_ind2\n");
+		print_arr(a->arr, a->size);
+		min_ind = find_min_ind(a->arr, a->size) - j;
+		printf("min_ind: %d\n", min_ind);
+		if (min_ind < a->size / 2)
+		{
+			i = -1;
+			while (++i < min_ind)
 			{
-				ss(a, b);
-				ft_putendl_fd("ss", 1);
+				revr(a);
+				ft_putendl_fd("rra", 1);
+				print_arr(a->arr, a->size);
+				s(a);
+				ft_putendl_fd("sa", 1);
+				print_arr(a->arr, a->size);
 			}
-			else if (a->top > a->arr[a->size - 2])
+		}
+		else if (min_ind > a->size / 2 && min_ind != a->size - 2)
+		{
+			i = -1;
+			while (++i < distance(min_ind, a->size - 1, a->size) - 1)
 			{
 				s(a);
 				ft_putendl_fd("sa", 1);
+				print_arr(a->arr, a->size);
+				r(a);
+				ft_putendl_fd("ra", 1);
+				print_arr(a->arr, a->size);
 			}
-			else if (b->top > b->arr[b->size - 2])
-			{
-				s(b);
-				ft_putendl_fd("sb", 1);
-			}
-			else
-			{
-				rr(a, b);
-				ft_putendl_fd("rr", 1);
-			}
-			print_arr(a->arr, a->size);
-			print_arr(b->arr, b->size);
 		}
-		//rr(a, b);
-		//ft_putendl_fd("rr", 1);
+		min_ind = find_min_ind(a->arr, a->size);
+		rotate_to_top(a, min_ind);
+		printf("rotate to top min_ind\n");
+		print_arr(a->arr, a->size);
 	}
 }
 
@@ -91,10 +127,14 @@ int	main(int argc, char **argv)
 	a = initialize_stack_a(argc, argv);
 	b = initialize_stack_b();
 	
-	split_stacks(&a, &b);
-	sort(&a, &b);
+	//split_stacks(&a, &b);
 
-	//print_arr(a.arr, a.size);
+	print_arr(a.arr, a.size);
+	//print_arr(b.arr, b.size);
+
+	sort(&a);
+
+	print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);
 	
 	clean_stack(a);
