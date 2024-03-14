@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 13:30:53 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:58:29 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ void	r(stack *a);
 void	rr(stack *a, stack *b);
 void	revr(stack *a);
 void	revrr(stack *a, stack *b);
+
+//main
+void	split_stacks(stack *a, stack *b);
 
 #endif
