@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 12:52:07 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:01:22 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_putendl_fd(char *s, int fd);
 stack	initialize_stack_a(int argc, char **argv);
 stack	initialize_stack_b();
 void	clean_stack(stack a);
-void	copy_arr_until(int *src, int *dst, int n);
+void	copy_arr_until(int *dst, int *src, int n);
 int		find_max(int *a, int size);
 int		find_min(int *a, int size);
 int		find_middle(int *a, int size);
@@ -41,5 +41,6 @@ void	print_arr(int *a, int size); //sil
 void	s(stack *a);
 void	ss(stack *a, stack *b);
 void	p(stack *a, stack *b);
+void	r(stack *a);
 
 #endif

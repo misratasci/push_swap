@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 12:41:26 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:05:03 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,24 @@ void	clean_stack(stack a)
 	free(a.arr);
 }
 
-void copy_arr_until(int *src, int *dst, int n)
+void	copy_arr_until(int *dst, int *src, int n)
 {
-	int	i;
+	int		i;
 
-	i = -1;
-	while (++i < n)
-		dst[i] = src[i];
+	if (!dst && !src)
+		return ;
+	if (dst <= src)
+	{
+		i = -1;
+		while (++i < n)
+			dst[i] = src[i];
+	}
+	if (dst > src)
+	{
+		i = n;
+		while (i-- > 0)
+			dst[i] = src[i];
+	}
 }
 
 int	find_max(int *a, int size)
