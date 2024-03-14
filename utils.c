@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 13:31:10 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/14 14:25:35 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,15 @@ int	abs(int a)
 
 int	find_middle(int *a, int size) //bunsuz da deneyebilirsin
 {
-	int	max;
-	int	min;
+	int	maxmin[2];
 	int	middle;
 	int	diff;
 	int	i;
+	int	res;
 
-	max = find_max(a, size);
-	min = find_min(a, size);
-	middle = (max + min) / 2;
+	maxmin[0] = find_max(a, size);
+	maxmin[1] = find_min(a, size);
+	middle = (maxmin[0] + maxmin[1]) / 2;
 	i = -1;
 	diff = abs(a[0] - middle);
 	while (++i < size)
@@ -125,10 +125,10 @@ int	find_middle(int *a, int size) //bunsuz da deneyebilirsin
 		else if (diff < abs(a[i] - middle))
 		{
 			diff = abs(a[i] - middle);
-			middle = a[i];
+			res = a[i];
 		}
 	}
-	return (middle);
+	return (res);
 }
 
 
