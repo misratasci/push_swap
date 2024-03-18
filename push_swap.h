@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 16:16:31 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 11:58:04 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		find_max(int *a, int size);
 int		find_min(int *a, int size);
 int		find_middle(int *a, int size);
 int		abs(int a);
-int		find_min_ind(int *a, int size);
+int		find_next_min(int *a, int size, int prev_min);
+int		find_ind(int *a, int size, int value);
 int		distance(int ind1, int ind2, int size);
 void	print_arr(int *a, int size); //sil
 

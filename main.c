@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 10:39:41 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 12:26:01 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,33 @@ void	move_down(stack *a, int n)
 	}
 }
 
-void	sort(stack *a)
+void	sort_inc(stack *a)
 {
 	int	min_ind;
 	int	min_ind2;
 	int	j;
+	int next_min;
+	int	min;
 
-	min_ind = find_min_ind(a->arr, a->size);
-	rotate_to_top(a, min_ind);
+	min = find_min(a->arr, a->size);
+	next_min = min;
+	min_ind = find_ind(a->arr, a->size, next_min);
 	j = -1;
 	while (++j < a->size)
 	{
-		min_ind2 = find_min_ind(a->arr, a->size - j - 1);
+		next_min = find_next_min(a->arr, a->size, next_min);
+		min_ind2 = find_ind(a->arr, a->size, next_min);
 		rotate_to_top(a, min_ind2);
-		min_ind = find_min_ind(a->arr, a->size) - j;
-		if (min_ind <= a->size / 2)
-			move_up(a, min_ind);
-		else if (min_ind > a->size / 2 && min_ind != a->size - 2)
-			move_down(a, distance(min_ind, a->size - 1, a->size));
-		min_ind = find_min_ind(a->arr, a->size);
-		rotate_to_top(a, min_ind);
+		if (distance(min_ind, min_ind2, a->size) > 0)
+			move_up(a, distance(min_ind, min_ind2, a->size) - 1);
+		else
+			move_down(a, -distance(min_ind, min_ind2, a->size));
+		min = next_min;
+		min_ind = find_ind(a->arr, a->size, min);
 	}
+	min = find_min(a->arr, a->size);
+	min_ind = find_ind(a->arr, a->size, min);
+	rotate_to_top(a, min_ind);
 }
 
 void	split_stacks(stack *a, stack *b)
@@ -131,7 +137,7 @@ int	main(int argc, char **argv)
 	//print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);
 
-	sort(&a);
+	sort_inc(&a);
 
 	print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);

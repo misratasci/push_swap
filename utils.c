@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 16:18:38 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 12:23:12 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,26 +98,41 @@ int	find_min(int *a, int size)
 	return (min);
 }
 
-int	find_min_ind(int *a, int size)
+int	find_ind(int *a, int size, int value)
 {
 	int	i;
-	int	min;
 	int	ind;
 
 	if (!a || size < 1)
 		return (-1);
-	min = a[0];
 	ind = 0;
 	i = -1;
 	while (++i < size)
 	{
-		if (a[i] < min)
-		{
-			min = a[i];
+		if (a[i] == value)
 			ind = i;
-		}
 	}
 	return (ind);
+}
+
+int	find_next_min(int *a, int size, int prev_min)
+{
+	int	i;
+	int	res;
+
+	if (!a || size < 2)
+		return (-1);
+	i = 0;
+	while (a[i] < prev_min)
+		i++;
+	res = a[i];
+	while (i < size)
+	{
+		if (a[i] < res && a[i] > prev_min)
+			res = a[i];
+		i++;
+	}
+	return (res);
 }
 
 int	abs(int a)
