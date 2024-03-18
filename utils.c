@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:26:57 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 16:48:30 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,9 +221,10 @@ int	find_middle(int *a, int size) //bunsuz da deneyebilirsin
 	{
 		if (a[i] == middle)
 			return (middle);
-		else if (diff < abs(a[i] - middle))
+		else if (diff > abs(a[i] - middle))
 		{
 			diff = abs(a[i] - middle);
+			//printf("diff: %d\n", diff);
 			res = a[i];
 		}
 	}

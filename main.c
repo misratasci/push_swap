@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:28:12 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:05:28 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,33 @@ void	sort_inc(stack *a)
 	rotate_to_top(a, min);
 }
 
+void	sort_dec(stack *a)
+{
+	int	max;
+	int next_max;
+	int	i;
+	int	dist;
+
+	max = find_max(a->arr, a->size);
+	next_max = max;
+	i = -1;
+	while (++i < a->size - 1)
+	{
+		next_max = find_next_max(a->arr, a->size, next_max);
+		dist = distance(max, next_max, a->arr, a->size);
+		//printf("max: %d, next max: %d, dist: %d\n", max, next_max, dist);
+		if (dist != 1)
+			rotate_to_top(a, next_max);
+		if (dist > 1)
+			move_up(a, dist - 1);
+		else if (dist < 0)
+			move_down(a, -dist);
+		max = next_max;
+	}
+	max = find_max(a->arr, a->size);
+	rotate_to_top(a, max);
+}
+
 void	split_stacks(stack *a, stack *b)
 {
 	int middle;
@@ -111,9 +138,10 @@ void	split_stacks(stack *a, stack *b)
 	size = a->size;
 	middle = find_middle(a->arr, a->size);
 	i = -1;
-	printf("middle: %d\n", middle);
+	//printf("middle: %d\n", middle);
 	while (++i < size)
 	{
+		//printf("top: %d\n", a->top);
 		if (a->top < middle)
 		{
 			p(a, b);
@@ -129,6 +157,15 @@ void	split_stacks(stack *a, stack *b)
 	}
 }
 
+void	merge_stacks(stack *a, stack *b)
+{
+	while (b->size > 0)
+	{
+		p(b, a);
+		ft_putendl_fd("pa", 1);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	stack a;
@@ -140,12 +177,21 @@ int	main(int argc, char **argv)
 	a = initialize_stack_a(argv);
 	b = initialize_stack_b();
 	
-	//split_stacks(&a, &b);
+	split_stacks(&a, &b);
+
+	print_arr(a.arr, a.size);
+	print_arr(b.arr, b.size);
 
 	sort_inc(&a);
+	sort_dec(&b);
 
-	//print_arr(a.arr, a.size);
-	//print_arr(b.arr, b.size);
+	print_arr(a.arr, a.size);
+	print_arr(b.arr, b.size);
+
+	merge_stacks(&a, &b);
+	
+	print_arr(a.arr, a.size);
+	print_arr(b.arr, b.size);
 	
 	clean_stack(a);
 	clean_stack(b);
