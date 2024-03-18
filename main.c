@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:05:28 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:08:42 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	split_stacks(stack *a, stack *b)
 	int	size;
 
 	size = a->size;
-	middle = find_middle(a->arr, a->size);
+	middle = (find_max(a->arr, a->size) + find_min(a->arr, a->size)) / 2;
 	i = -1;
 	//printf("middle: %d\n", middle);
 	while (++i < size)

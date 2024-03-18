@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:48:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:09:27 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,35 +203,6 @@ int	distance(int val1, int val2, int *a, int size)
 	else
 		return (diff - size);
 }
-
-int	find_middle(int *a, int size) //bunsuz da deneyebilirsin
-{
-	int	maxmin[2];
-	int	middle;
-	int	diff;
-	int	i;
-	int	res;
-
-	maxmin[0] = find_max(a, size);
-	maxmin[1] = find_min(a, size);
-	middle = (maxmin[0] + maxmin[1]) / 2;
-	i = -1;
-	diff = abs(a[0] - middle);
-	while (++i < size)
-	{
-		if (a[i] == middle)
-			return (middle);
-		else if (diff > abs(a[i] - middle))
-		{
-			diff = abs(a[i] - middle);
-			//printf("diff: %d\n", diff);
-			res = a[i];
-		}
-	}
-	return (res);
-}
-
-
 
 void	print_arr(int *a, int size) //bunu sonradan sil
 {
