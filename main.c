@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:14:19 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:12 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	rotate_to_top(stack *a, int val)
 			ft_putendl_fd("rra", 1);
 		}
 	}
-	printf("Rotated %d to top\n", val);
-	print_arr(a->arr, a->size);
+	//printf("Rotated %d to top\n", val);
+	//print_arr(a->arr, a->size);
 }
 
 void	move_up(stack *a, int n)
@@ -51,8 +51,8 @@ void	move_up(stack *a, int n)
 		ft_putendl_fd("rra", 1);
 		s(a);
 		ft_putendl_fd("sa", 1);
-		printf("Moved up\n");
-		print_arr(a->arr, a->size);
+		//printf("Moved up\n");
+		//print_arr(a->arr, a->size);
 	}
 }
 
@@ -70,8 +70,8 @@ void	move_down(stack *a, int n)
 			r(a);
 			ft_putendl_fd("ra", 1);
 		}
-		printf("Moved down\n");
-		print_arr(a->arr, a->size);
+		//printf("Moved down\n");
+		//print_arr(a->arr, a->size);
 	}
 }
 
@@ -89,7 +89,7 @@ void	sort_inc(stack *a)
 	{
 		next_min = find_next_min(a->arr, a->size, next_min);
 		dist = distance(min, next_min, a->arr, a->size);
-		printf("min: %d, next min: %d, dist: %d\n", min, next_min, dist);
+		//printf("min: %d, next min: %d, dist: %d\n", min, next_min, dist);
 		if (dist != 1)
 			rotate_to_top(a, next_min);
 		if (dist > 1)
@@ -134,15 +134,17 @@ int	main(int argc, char **argv)
 	stack a;
 	stack b;
 	
+	if (argc <= 1)
+		return (1);
 	//error if duplicate, not num, bigger than int
-	a = initialize_stack_a(argc, argv);
+	a = initialize_stack_a(argv);
 	b = initialize_stack_b();
 	
 	//split_stacks(&a, &b);
 
 	sort_inc(&a);
 
-	print_arr(a.arr, a.size);
+	//print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);
 	
 	clean_stack(a);

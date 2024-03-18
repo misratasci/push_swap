@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 15:33:04 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 16:27:02 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ typedef struct stack
 //libft
 int		ft_atoi(const char *str);
 void	ft_putendl_fd(char *s, int fd);
+char	**ft_split(char const *s, char c);
 
 //utils
-stack	initialize_stack_a(int argc, char **argv);
+stack	initialize_stack_a(char **argv);
 stack	initialize_stack_b();
 void	clean_stack(stack a);
 void	copy_arr_until(int *dst, int *src, int n);
