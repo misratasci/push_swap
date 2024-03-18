@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:01:38 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 16:14:19 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	rotate_to_top(stack *a, int val)
 			ft_putendl_fd("rra", 1);
 		}
 	}
+	printf("Rotated %d to top\n", val);
+	print_arr(a->arr, a->size);
 }
 
 void	move_up(stack *a, int n)
@@ -49,8 +51,8 @@ void	move_up(stack *a, int n)
 		ft_putendl_fd("rra", 1);
 		s(a);
 		ft_putendl_fd("sa", 1);
-		//printf("Moved up\n");
-		//print_arr(a->arr, a->size);
+		printf("Moved up\n");
+		print_arr(a->arr, a->size);
 	}
 }
 
@@ -68,8 +70,8 @@ void	move_down(stack *a, int n)
 			r(a);
 			ft_putendl_fd("ra", 1);
 		}
-		//printf("Moved down\n");
-		//print_arr(a->arr, a->size);
+		printf("Moved down\n");
+		print_arr(a->arr, a->size);
 	}
 }
 
@@ -78,19 +80,22 @@ void	sort_inc(stack *a)
 	int	min;
 	int next_min;
 	int	i;
+	int	dist;
 
 	min = find_min(a->arr, a->size);
 	next_min = min;
 	i = -1;
-	while (++i < a->size)
+	while (++i < a->size - 1)
 	{
 		next_min = find_next_min(a->arr, a->size, next_min);
-		if (distance(min, next_min, a->arr, a->size) != 1)
+		dist = distance(min, next_min, a->arr, a->size);
+		printf("min: %d, next min: %d, dist: %d\n", min, next_min, dist);
+		if (dist != 1)
 			rotate_to_top(a, next_min);
-		if (distance(min, next_min, a->arr, a->size) > 1)
-			move_down(a, distance(min, next_min, a->arr, a->size));
-		else if (distance(min, next_min, a->arr, a->size) < 0)
-			move_up(a, -distance(min, next_min, a->arr, a->size) - 1);
+		if (dist > 1)
+			move_up(a, dist - 1);
+		else if (dist < 0)
+			move_down(a, -dist);
 		min = next_min;
 	}
 	min = find_min(a->arr, a->size);
