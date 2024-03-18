@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:08:42 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:16:00 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,19 +179,19 @@ int	main(int argc, char **argv)
 	
 	split_stacks(&a, &b);
 
-	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
+	//print_arr(a.arr, a.size);
+	//print_arr(b.arr, b.size);
 
 	sort_inc(&a);
 	sort_dec(&b);
 
-	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
+	//print_arr(a.arr, a.size);
+	//print_arr(b.arr, b.size);
 
 	merge_stacks(&a, &b);
 	
 	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
+	//print_arr(b.arr, b.size);
 	
 	clean_stack(a);
 	clean_stack(b);
