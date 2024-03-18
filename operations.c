@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 16:53:11 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:19:58 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,4 @@ void	revr(stack *a)
 	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
 	a->arr[0] = tmp;
 	a->top = a->arr[a->size - 1];
-}
-
-void	revrr(stack *a, stack *b)
-{
-	revr(a);
-	revr(b);
 }
