@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/14 13:34:13 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:05:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	s(stack *a)
 		ft_putendl_fd("Less than 2 elements in stack, cannot swap", 1);
 		return ;
 	}
-	tmp = a->arr[a->size - 1];
-	a->arr[a->size - 1] = a->arr[a->size - 2];
-	a->arr[a->size - 2] = tmp;
-	a->top = a->arr[a->size - 1];
+	tmp = a->arr[0];
+	a->arr[0] = a->arr[1];
+	a->arr[1] = tmp;
+	a->top = a->arr[0];
 }
 
 void	ss(stack *a, stack *b)
@@ -40,35 +40,25 @@ void	p(stack *a, stack *b)
 	if (a->size == 0)
 		return ;
 	tmp = (int *)malloc(sizeof(int) * (b->size + 1));
+	tmp[0] = a->arr[0];
 	if (b->size > 0)
 	{
-		copy_arr_until(tmp, b->arr, b->size);
+		copy_arr_until(tmp + 1, b->arr, b->size);
 		free(b->arr);
 	}
-	tmp[b->size] = a->arr[a->size - 1];
 	b->arr = (int *)malloc(sizeof(int) * (b->size + 1));
 	copy_arr_until(b->arr, tmp, b->size + 1);
 	b->size++;
-	b->top = b->arr[b->size - 1];
+	b->top = b->arr[0];
 	free(tmp);
 	tmp = (int *)malloc(sizeof(int) * (a->size - 1));
-	copy_arr_until(tmp, a->arr, a->size - 1);
+	copy_arr_until(tmp, a->arr + 1, a->size - 1);
 	free(a->arr);
 	a->arr = (int *)malloc(sizeof(int) * (a->size - 1));
 	copy_arr_until(a->arr, tmp, a->size - 1);
 	a->size--;
-	a->top = a->arr[a->size - 1];
+	a->top = a->arr[0];
 	free(tmp);
-}
-
-void	r(stack *a)
-{
-	int	tmp;
-
-	tmp = a->arr[a->size - 1];
-	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
-	a->arr[0] = tmp;
-	a->top = a->arr[a->size - 1];
 }
 
 void	rr(stack *a, stack *b)
@@ -77,13 +67,23 @@ void	rr(stack *a, stack *b)
 	r(b);
 }
 
-void	revr(stack *a)
+void	r(stack *a)
 {
 	int	tmp;
 
 	tmp = a->arr[0];
 	copy_arr_until(a->arr, a->arr + 1, a->size - 1);
 	a->arr[a->size - 1] = tmp;
+	a->top = a->arr[a->size - 1];
+}
+
+void	revr(stack *a)
+{
+	int	tmp;
+
+	tmp = a->arr[a->size - 1];
+	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
+	a->arr[0] = tmp;
 	a->top = a->arr[a->size - 1];
 }
 

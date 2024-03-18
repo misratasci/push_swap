@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 12:33:42 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:53:21 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ stack	initialize_stack_a(int argc, char **argv)
 	i = -1;
 	while (++i < a.size)
 		a.arr[i] = ft_atoi(argv[i + 1]);
-	a.top = a.arr[a.size - 1];
+	a.top = a.arr[0];
 	return (a);
 }
 
