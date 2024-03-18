@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 12:23:12 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/18 12:33:42 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,26 @@ int	find_next_min(int *a, int size, int prev_min)
 	while (i < size)
 	{
 		if (a[i] < res && a[i] > prev_min)
+			res = a[i];
+		i++;
+	}
+	return (res);
+}
+
+int	find_next_max(int *a, int size, int prev_max)
+{
+	int	i;
+	int	res;
+
+	if (!a || size < 2)
+		return (-1);
+	i = 0;
+	while (a[i] > prev_max)
+		i++;
+	res = a[i];
+	while (i < size)
+	{
+		if (a[i] > res && a[i] < prev_max)
 			res = a[i];
 		i++;
 	}
