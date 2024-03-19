@@ -6,18 +6,27 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 18:33:57 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 19:03:20 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int	find_place(int val, stack *b)
+int	find_place(int val, stack *b)
 {
 	int	i;
 	int	max;
 	int	min;
+	int	max;
+	int	min;
 
+	max = find_max(b->arr, b->size);
+	if (max < val)
+		return (find_ind(b->arr, b->size, max));
+	min = find_min(b->arr, b->size);
+	if (min > val)
+		return ((find_ind(b->arr, b->size, min) + 1) % b->size);
 	max = find_max(b->arr, b->size);
 	if (max < val)
 		return (find_ind(b->arr, b->size, max));
@@ -29,13 +38,22 @@ int	find_place(int val, stack *b)
 	{	
 		if (val < b->arr[i] && val > b->arr[(i + 1) % b->size])
 			return ((i + 1) % b->size);
+	while (++i < b->size)
+	{	
+		if (val < b->arr[i] && val > b->arr[(i + 1) % b->size])
+			return ((i + 1) % b->size);
 	}
+	return (-1);
 	return (-1);
 }
 
 int	get_push_ind(stack *a, stack *b)
+int	get_push_ind(stack *a, stack *b)
 {
 	int	i;
+	int	i1;
+	int	i2;
+	
 	int	i1;
 	int	i2;
 	
@@ -64,17 +82,41 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 {
 	int	i;
 	
+	
 	i = -1;
+	while (++i < push_ind)
+		rr(a, b);
+	p(a, b);
 	while (++i < push_ind)
 		rr(a, b);
 	p(a, b);
 }
 
 int	r_cost(stack *a, stack *b, int s, int rev)
+int	r_cost(stack *a, stack *b, int s, int rev)
 {
 	int	push_ind;
 	int	n;
+	int	push_ind;
+	int	n;
 	int	i;
+	stack *tmp;
+	
+	if (s == 0)
+		tmp = a;
+	else
+		tmp = b;
+	push_ind = 0;
+	n = 0;
+	while (push_ind != -1)
+	{
+		if (rev == 0)
+			r_sim(tmp);
+		else
+			revr_sim(tmp);
+		push_ind = get_push_ind(a, b);
+		n++;
+	}
 	stack *tmp;
 	
 	if (s == 0)
