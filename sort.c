@@ -6,13 +6,12 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 19:03:20 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 19:07:20 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_place(int val, stack *b)
 int	find_place(int val, stack *b)
 {
 	int	i;
@@ -47,7 +46,6 @@ int	find_place(int val, stack *b)
 	return (-1);
 }
 
-int	get_push_ind(stack *a, stack *b)
 int	get_push_ind(stack *a, stack *b)
 {
 	int	i;
@@ -92,7 +90,6 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 	p(a, b);
 }
 
-int	r_cost(stack *a, stack *b, int s, int rev)
 int	r_cost(stack *a, stack *b, int s, int rev)
 {
 	int	push_ind;
