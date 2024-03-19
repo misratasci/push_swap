@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 16:41:45 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 17:23:54 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,77 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 	p(a, b);
 }
 
+int	r_cost(stack *a, stack *b)
+{
+	int	push_ind;
+	int	n;
+	int	i;
+	
+	push_ind = 0;
+	n = 0;
+	while (push_ind != -1)
+	{
+		r_sim(a);
+		push_ind = get_push_ind(a, b);
+		n++;
+	}
+	printf("sim-push-ind: %d\n", push_ind);
+	i = -1;
+	while (++i < n)
+		revr_sim(a);
+	return (push_ind + n + 1);
+}
+
+int	revr_cost(stack *a, stack *b)
+{
+	int	push_ind;
+	int	n;
+	int	i;
+	
+	push_ind = 0;
+	n = 0;
+	while (push_ind != -1)
+	{
+		revr_sim(a);
+		push_ind = get_push_ind(a, b);
+		n++;
+	}
+	printf("sim-push-ind: %d\n", push_ind);
+	i = -1;
+	while (++i < n)
+		r_sim(a);
+	return (push_ind + n + 1);
+}
+
 void	sort(stack *a, stack *b)
 {
 	int	push_ind;
-	//int	i;
+	int	r_c;
+	int	revr_c;
 	
 	p(a, b);
 	p(a, b);
 	if (b->top < b->arr[1])
 		s(b);
-	//i = -1;
 	while (a->size > 0)
 	{
+		print_arr(a->arr, a->size);
+		print_arr(b->arr, b->size);
 		push_ind = get_push_ind(a, b);
+		printf("push ind: %d\n", push_ind);
 		if (push_ind != -1)
 			rotate_push(a, b, push_ind);
 		else if (a->size > b->size)
-			r(a);
+		{
+			r_c = r_cost(a, b);
+			revr_c = revr_cost(a, b);
+			if (r_c <= revr_c)
+				r(a);
+			else
+				revr(a);
+		}
 		else
 			r(b);
-		//print_arr(a->arr, a->size);
-		//print_arr(b->arr, b->size);
 	}
 	rotate_to_top(b, find_max(b->arr, b->size));
 }
