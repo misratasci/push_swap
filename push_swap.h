@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 16:01:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 17:00:55 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		min(int a, int b);
 int		max(int a, int b);
 int		abs(int a);
 int		distance(int val1, int val2, int *a, int size);
+void	r_sim(stack *a);
+void	revr_sim(stack *a);
 
 //main
 void	split_stacks(stack *a, stack *b);
