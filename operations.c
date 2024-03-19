@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:19:58 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:31:54 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,32 @@ void	s(stack *a)
 	int	tmp;
 
 	if (a->size < 2)
-	{
-		ft_putendl_fd("Less than 2 elements in stack, cannot swap", 1);
 		return ;
-	}
 	tmp = a->arr[0];
 	a->arr[0] = a->arr[1];
 	a->arr[1] = tmp;
 	a->top = a->arr[0];
+	write(1, "s", 1);
+	write(1, &a->name, 1);
+	write(1, "\n", 1);
 }
 
 void	ss(stack *a, stack *b)
 {
-	s(a);
-	s(b);
+	int	tmp;
+	
+	if (a->size >= 2 && b->size >= 2)
+	{
+		tmp = a->arr[0];
+		a->arr[0] = a->arr[1];
+		a->arr[1] = tmp;
+		a->top = a->arr[0];
+		tmp = b->arr[0];
+		b->arr[0] = b->arr[1];
+		b->arr[1] = tmp;
+		b->top = b->arr[0];
+		write(1, "ss\n", 3);
+	}
 }
 
 void	p(stack *a, stack *b)
@@ -59,12 +71,24 @@ void	p(stack *a, stack *b)
 	a->size--;
 	a->top = a->arr[0];
 	free(tmp);
+	write(1, "p", 1);
+	write(1, &b->name, 1);
+	write(1, "\n", 1);
 }
 
 void	rr(stack *a, stack *b)
 {
-	r(a);
-	r(b);
+	int	tmp;
+
+	tmp = a->arr[0];
+	copy_arr_until(a->arr, a->arr + 1, a->size - 1);
+	a->arr[a->size - 1] = tmp;
+	a->top = a->arr[0];
+	tmp = b->arr[0];
+	copy_arr_until(b->arr, b->arr + 1, b->size - 1);
+	b->arr[b->size - 1] = tmp;
+	b->top = b->arr[0];
+	write(1, "rr\n", 3);
 }
 
 void	r(stack *a)
@@ -75,6 +99,9 @@ void	r(stack *a)
 	copy_arr_until(a->arr, a->arr + 1, a->size - 1);
 	a->arr[a->size - 1] = tmp;
 	a->top = a->arr[0];
+	write(1, "r", 1);
+	write(1, &a->name, 1);
+	write(1, "\n", 1);
 }
 
 void	revr(stack *a)
@@ -85,4 +112,7 @@ void	revr(stack *a)
 	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
 	a->arr[0] = tmp;
 	a->top = a->arr[a->size - 1];
+	write(1, "rr", 2);
+	write(1, &a->name, 1);
+	write(1, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:25:23 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:25:58 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:34:19 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,80 @@ void	rotate_to_top(stack *a, int val)
 	{
 		i = -1;
 		while (++i < ind )
-		{
 			r(a);
-			ft_putendl_fd("ra", 1);
-		}
 	}
 	else
 	{
 		i = -1;
 		while (++i < a->size - ind)
-		{
 			revr(a);
-			ft_putendl_fd("rra", 1);
-		}
 	}
 	//printf("Rotated %d to top\n", val);
 	//print_arr(a->arr, a->size);
+}
+
+void	r_together(stack *a, stack *b, int ind_a, int ind_b)
+{
+	int	i;
+
+	i = -1;
+	while (++i < min(ind_a, ind_b))
+		rr(a, b);
+	while (i < ind_a)
+	{
+		r(a);
+		i++;
+	}
+	while (i++ < ind_b)
+		r(b);
+}
+
+void revr_together(stack *a, stack *b, int ind_a, int ind_b)
+{
+	int	i;
+
+	i = -1;
+	while (++i < min(a->size - ind_a, b->size - ind_b))
+		revrr(a, b);
+	while (i < a->size - ind_a)
+	{
+		revr(a);
+		i++;
+	}
+	while (i++ < b->size - ind_b)
+		revr(b);
+}
+
+int	sep_rot_cost(stack *a, stack *b, int ind_a, int ind_b)
+{
+	return (min(ind_a, a->size - ind_a) + min(ind_b, b->size - ind_b));
+}
+
+int	tog_rot_cost(stack *a, stack *b, int ind_a, int ind_b)
+{
+	return (min(max(ind_b, ind_a), max(b->size - ind_b, a->size - ind_a)));
+}
+
+void rotate_to_top_together(stack *a, stack *b, int val_a, int val_b)
+{
+	int ind_a;
+	int ind_b;
+
+	ind_a = find_ind(a->arr, a->size, val_a);
+	ind_b = find_ind(b->arr, b->size, val_b);
+
+	if (tog_rot_cost(a, b, ind_a, ind_b) < sep_rot_cost(a, b, ind_a, ind_b))
+	{
+		if (ind_b < a->size - ind_a)
+			r_together(a, b, ind_a, ind_b);
+		else
+			revr_together(a, b, ind_a, ind_b);
+	}
+	else
+	{
+		rotate_to_top(a, val_a);
+		rotate_to_top(b, val_b);
+	}
 }
 
 void	move_up(stack *a, int n)
@@ -48,9 +106,7 @@ void	move_up(stack *a, int n)
 	while (++i < n)
 	{
 		revr(a);
-		ft_putendl_fd("rra", 1);
 		s(a);
-		ft_putendl_fd("sa", 1);
 		//printf("Moved up\n");
 		//print_arr(a->arr, a->size);
 	}
@@ -64,12 +120,8 @@ void	move_down(stack *a, int n)
 	while (++i < n)
 	{
 		s(a);
-		ft_putendl_fd("sa", 1);
 		if (i < n - 1)
-		{
 			r(a);
-			ft_putendl_fd("ra", 1);
-		}
 		//printf("Moved down\n");
 		//print_arr(a->arr, a->size);
 	}
@@ -127,4 +179,36 @@ void	sort_dec(stack *a)
 	}
 	max = find_max(a->arr, a->size);
 	rotate_to_top(a, max);
+}
+
+void	sort(stack *a, stack *b)
+{
+	int	aa[3];
+	int	bb[3];
+	int	i;
+
+	aa[0] = find_min(a->arr, a->size);
+	bb[0] = find_max(b->arr, b->size);
+	aa[1] = aa[0];
+	bb[1] = bb[0];
+	i = -1;
+	
+	if (a->size > b->size)
+	{
+		//max ya da mini ayır 
+	}
+	
+	while (++i < b->size - 1)
+	{
+		aa[1] = find_next_min(a->arr, a->size, a[1]);
+		bb[1] = find_next_max(b->arr, b->size, b[1]);
+		aa[2] = distance(aa[0], aa[1], a->arr, a->size);
+		bb[2] = distance(bb[0], bb[1], b->arr, b->size);
+		if (aa[2] != 1 || bb[2] != 1)
+			rotate_to_top_together(a, b, aa[1], bb[1]);
+		if (aa[2] > 1 && bb[2] > 1)
+		{
+			
+		}
+	}
 }

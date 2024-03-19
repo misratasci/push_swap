@@ -6,11 +6,31 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:26:07 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:30:17 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+//önceden sort edip medyanını bulmayı dene
+void	equalize_stacks(stack *a, stack *b)
+{
+	int val;
+	
+	if (a->size == b->size)
+		return ;
+	while (a->size > b->size)
+	{
+		val = find_min(a->arr, a->size);
+		rotate_to_top(a, val);
+		p(a, b);
+	}
+	while (a->size < b->size)
+	{
+		val = find_max(b->arr, b->size);
+		rotate_to_top(b, val);
+		p(b, a);
+	}
+}
 
 void	split_stacks(stack *a, stack *b)
 {
@@ -26,27 +46,19 @@ void	split_stacks(stack *a, stack *b)
 	{
 		//printf("top: %d\n", a->top);
 		if (a->top < middle)
-		{
 			p(a, b);
-			ft_putendl_fd("pb", 1);
-		} 
 		else
-		{
 			r(a);
-			ft_putendl_fd("ra", 1);
-		}
 		//print_arr(a->arr, a->size);
 		//print_arr(b->arr, b->size);
 	}
+	equalize_stacks(a, b);
 }
 
 void	merge_stacks(stack *a, stack *b)
 {
 	while (b->size > 0)
-	{
 		p(b, a);
-		ft_putendl_fd("pa", 1);
-	}
 }
 
 int	main(int argc, char **argv)
@@ -62,18 +74,23 @@ int	main(int argc, char **argv)
 	
 	split_stacks(&a, &b);
 
-	//print_arr(a.arr, a.size);
-	//print_arr(b.arr, b.size);
-
-	sort_inc(&a);
-	sort_dec(&b);
-
-	//print_arr(a.arr, a.size);
-	//print_arr(b.arr, b.size);
-
-	merge_stacks(&a, &b);
-	
+	printf("splitted\n");
 	print_arr(a.arr, a.size);
+	print_arr(b.arr, b.size);
+
+	rotate_to_top_together(&a, &b, 6, 5);
+	print_arr(a.arr, a.size);
+	print_arr(b.arr, b.size);
+
+	//sort_inc(&a);
+	//sort_dec(&b);
+
+	//print_arr(a.arr, a.size);
+	//print_arr(b.arr, b.size);
+
+	//merge_stacks(&a, &b);
+	
+	//print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);
 	
 	clean_stack(a);
