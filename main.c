@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 14:30:17 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:41:39 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,15 @@ int	main(int argc, char **argv)
 	a = initialize_stack_a(argv);
 	b = initialize_stack_b();
 	
-	split_stacks(&a, &b);
+	//print_arr(a.arr, a.size);
+	//print_arr(b.arr, b.size);
 
-	printf("splitted\n");
-	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
-
-	rotate_to_top_together(&a, &b, 6, 5);
-	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
-
-	//sort_inc(&a);
-	//sort_dec(&b);
+	sort(&a, &b);
 
 	//print_arr(a.arr, a.size);
 	//print_arr(b.arr, b.size);
 
-	//merge_stacks(&a, &b);
-	
-	//print_arr(a.arr, a.size);
-	//print_arr(b.arr, b.size);
+	merge_stacks(&a, &b);
 	
 	clean_stack(a);
 	clean_stack(b);
