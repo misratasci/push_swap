@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 17:23:54 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 17:48:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_push_ind(stack *a, stack *b)
 	i2 = -1;
 	while (++i < min(a->size, b->size))
 	{
-		//printf("place: %d\n", find_place(a->arr[i], b));
+		printf("place: %d\n", find_place(a->arr[i], b));
 		if (i == find_place(a->arr[i], b))
 			i1 = i;
 	}
@@ -70,46 +70,37 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 	p(a, b);
 }
 
-int	r_cost(stack *a, stack *b)
+int	r_cost(stack *a, stack *b, int s, int rev)
 {
 	int	push_ind;
 	int	n;
 	int	i;
+	stack *tmp;
 	
+	if (s == 0)
+		tmp = a;
+	else
+		tmp = b;
 	push_ind = 0;
 	n = 0;
 	while (push_ind != -1)
 	{
-		r_sim(a);
+		if (rev == 0)
+			r_sim(tmp);
+		else
+			revr_sim(tmp);
 		push_ind = get_push_ind(a, b);
 		n++;
 	}
-	printf("sim-push-ind: %d\n", push_ind);
 	i = -1;
 	while (++i < n)
-		revr_sim(a);
-	return (push_ind + n + 1);
-}
-
-int	revr_cost(stack *a, stack *b)
-{
-	int	push_ind;
-	int	n;
-	int	i;
-	
-	push_ind = 0;
-	n = 0;
-	while (push_ind != -1)
 	{
-		revr_sim(a);
-		push_ind = get_push_ind(a, b);
-		n++;
+		if (rev == 0)
+			revr_sim(tmp);
+		else
+			r_sim(tmp);
 	}
-	printf("sim-push-ind: %d\n", push_ind);
-	i = -1;
-	while (++i < n)
-		r_sim(a);
-	return (push_ind + n + 1);
+	return (push_ind + n);
 }
 
 void	sort(stack *a, stack *b)
@@ -132,8 +123,8 @@ void	sort(stack *a, stack *b)
 			rotate_push(a, b, push_ind);
 		else if (a->size > b->size)
 		{
-			r_c = r_cost(a, b);
-			revr_c = revr_cost(a, b);
+			r_c = r_cost(a, b, 0, 0);
+			revr_c = r_cost(a, b, 0, 1);
 			if (r_c <= revr_c)
 				r(a);
 			else
@@ -141,6 +132,7 @@ void	sort(stack *a, stack *b)
 		}
 		else
 			r(b);
+		printf("cost: %d\n", r_cost(a, b, 0,0));
 	}
 	rotate_to_top(b, find_max(b->arr, b->size));
 }
