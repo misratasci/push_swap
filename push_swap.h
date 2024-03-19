@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 17:00:55 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 17:43:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	rotate_to_top(stack *a, int val);
 void	rotate_to_top_together(stack *a, stack *b, int val_a, int val_b);
 void	move_down_together(stack *a, stack *b, int dist_a, int dist_b);
 void	move_up_together(stack *a, stack *b, int dist_a, int dist_b);
+int	r_cost(stack *a, stack *b, int s, int rev);
 
 #endif
