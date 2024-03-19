@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 17:48:24 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/19 18:33:57 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_push_ind(stack *a, stack *b)
 	i2 = -1;
 	while (++i < min(a->size, b->size))
 	{
-		printf("place: %d\n", find_place(a->arr[i], b));
+		//printf("place: %d\n", find_place(a->arr[i], b));
 		if (i == find_place(a->arr[i], b))
 			i1 = i;
 	}
@@ -100,14 +100,14 @@ int	r_cost(stack *a, stack *b, int s, int rev)
 		else
 			r_sim(tmp);
 	}
-	return (push_ind + n);
+	return (push_ind + n + 1);
 }
 
 void	sort(stack *a, stack *b)
 {
 	int	push_ind;
-	int	r_c;
-	int	revr_c;
+	//int	r_c;
+	//int	revr_c;
 	
 	p(a, b);
 	p(a, b);
@@ -122,14 +122,7 @@ void	sort(stack *a, stack *b)
 		if (push_ind != -1)
 			rotate_push(a, b, push_ind);
 		else if (a->size > b->size)
-		{
-			r_c = r_cost(a, b, 0, 0);
-			revr_c = r_cost(a, b, 0, 1);
-			if (r_c <= revr_c)
-				r(a);
-			else
-				revr(a);
-		}
+			r(a);
 		else
 			r(b);
 		printf("cost: %d\n", r_cost(a, b, 0,0));
