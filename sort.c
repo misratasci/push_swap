@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 19:09:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/20 15:10:08 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,27 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 {
 	int	i;
 	
-	i = -1;
-	while (++i < push_ind)
-		rr(a, b);
+	i = 0;
+	if (push_ind <= max(a->size, b->size) - push_ind)
+	{
+		while (i++ < push_ind)
+			rr(a, b);
+	}
+	else
+	{
+		while (a->size > b->size && i < a->size - b->size)
+		{
+			revr(a);
+			i++;
+		}
+		while (a->size < b->size && i < b->size - a->size)
+		{
+			revr(b);
+		}
+		i = 0;
+		while (i++ < min(a->size, b->size) - push_ind)
+			revrr(a, b);
+	}
 	p(a, b);
 }
 
@@ -126,7 +144,7 @@ void	sort(stack *a, stack *b)
 			r(a);
 		else
 			r(b);
-		printf("cost: %d\n", r_cost(a, b, 0,0));
+		//printf("cost: %d\n", r_cost(a, b, 0,0));
 	}
 	rotate_to_top(b, find_max(b->arr, b->size));
 }
