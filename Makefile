@@ -23,6 +23,7 @@ git:
 	git commit -m "$$message"
 	@git push
 	@git log
+	@q
 	
 
 .PHONY = all clean fclean re
