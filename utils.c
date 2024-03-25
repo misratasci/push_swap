@@ -6,11 +6,27 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/18 17:20:34 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:50:42 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sorted_init(stack *a)
+{
+	int curr_min;
+	int	i;
+
+
+	i = 0;
+	curr_min = find_min(a->arr, a->size);
+	a->sorted[i++] = curr_min;
+	while (i < a->size)
+	{
+		a->sorted[i] = find_next_min(a->arr, a->size, a->sorted[i - 1]);
+		i++;
+	}
+}
 
 int	listlen(char **l)
 {
@@ -31,7 +47,7 @@ void	free_list(char **l)
 		free(l[i++]);
 	free(l);
 }
-
+/*
 stack	initialize_stack_a(char **argv)
 {
 	stack	a;
@@ -47,6 +63,32 @@ stack	initialize_stack_a(char **argv)
 		a.arr[i] = ft_atoi(list[i]);
 	a.top = a.arr[0];
 	free_list(list);
+	return (a);
+}
+*/
+
+stack	initialize_stack_a(int argc, char **argv)
+{
+	stack	a;
+	int		i;
+	
+	a.name = 'a';
+	a.size = argc - 1;
+	a.arr = (int*)malloc(sizeof(int) * a.size);
+	i = -1;
+	while (++i < a.size)
+		a.arr[i] = ft_atoi(argv[i + 1]);
+	a.top = a.arr[0];
+	a.sorted = (int*)malloc(sizeof(int) * a.size);
+	i = 0;
+	while(i < a.size)
+		a.sorted[i++] = 0;
+	sorted_init(&a);
+	a.index = (int*)malloc(sizeof(int) * a.size);
+	i = 0;
+	while(i < a.size)
+		a.index[i++] = 0;
+	index_init(&a);
 	return (a);
 }
 

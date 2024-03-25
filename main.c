@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 17:45:12 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:47:45 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,21 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (1);
 	//error if duplicate, not num, bigger than int
-	a = initialize_stack_a(argv);
+	a = initialize_stack_a(argc, argv);
 	b = initialize_stack_b();
 	
 	
-	//print_arr(a.arr, a.size);
+	print_arr(a.arr, a.size);
+	print_arr(a.sorted, a.size);
 	//print_arr(b.arr, b.size);
 
-	sort(&a, &b);
-
-	print_arr(a.arr, a.size);
-	print_arr(b.arr, b.size);
+	//sort(&a, &b);
+	
+	//print_arr(b.arr, b.size);
 
 	//merge_stacks(&a, &b);
 	
+	//print_arr(a.arr, a.size);
 	clean_stack(a);
 	clean_stack(b);
 }

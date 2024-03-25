@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 17:43:24 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/25 19:48:27 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct stack
 	int		size;
 	int		*arr;
 	int		top;
+	int 	*sorted;
+	int		*index;
 } stack;
 
 //libft
@@ -31,7 +33,7 @@ void	ft_putendl_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 
 //utils
-stack	initialize_stack_a(char **argv);
+stack	initialize_stack_a(int argc, char **argv);
 stack	initialize_stack_b();
 void	clean_stack(stack a);
 void	copy_arr_until(int *dst, int *src, int n);
@@ -69,6 +71,6 @@ void	rotate_to_top(stack *a, int val);
 void	rotate_to_top_together(stack *a, stack *b, int val_a, int val_b);
 void	move_down_together(stack *a, stack *b, int dist_a, int dist_b);
 void	move_up_together(stack *a, stack *b, int dist_a, int dist_b);
-int	r_cost(stack *a, stack *b, int s, int rev);
+int		is_sorted(stack a);
 
 #endif
