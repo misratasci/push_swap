@@ -5,102 +5,129 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 14:32:49 by mitasci          ###   ########.fr       */
+/*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
+/*   Updated: 2024/03/26 15:13:28 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	split_stacks(stack *a, stack *b)
+int	is_sorted(stack a)
 {
 	int	i;
-	
-	printf("Pivot A: %d, Pivot B: %d\n", a->pivot, b->pivot);
-	i = 0;
-	while (b->size < a->size)
+
+	i = -1;
+	while (++i < a.size - 1)
 	{
-		if (a->index[i] == a->pivot)
-			r(a);
-		p(a, b);
-		if (find_ind(a->index, a->size, b->pivot) > a->size / 2)
-			revr(a);
-		i++;
+		if (a.arr[i] > a.arr[i + 1])
+			return (0);
 	}
-
+	return (1);
 }
 
-int	*init_lbl_arr(stack *a, stack *b)
-{
-	int	*lbl_arr;
-	int	i;
-
-	lbl_arr = (int *)malloc(sizeof(int) * (a->size + b->size));
-	i = -1;
-	while (++i < a->size + b->size)
-		lbl_arr[i] = 0;
-	return (lbl_arr);
-}
-
-int	in_stack(stack a, int val)
-{
-	return (find_ind(a.index, a.size, val) != -1);
-}
-
-/*
-0: wrong stack, wrong place
-1: right stack, wrong place
-2: right stack, right place
-3: wrong stack, right place, can reach with rr (in first half of stack)
-4: wrong stack, right place, can reach with rrr (in second half)
--1: is pivot a
--2: is pivot b
-
-(3 ve 4ü sonra yaparım kafam basmadı)
-*/
-int	calc_label(stack *a, stack *b, int val)
-{
-	int	right_stack;
-	int	right_place;
-
-	if (val == a->pivot)
-		return (-1);
-	if (val == b->pivot)
-		return (-2);
-	right_stack = (val > b->pivot && in_stack(*a, val)) || (val < b->pivot && in_stack(*b, val));
-	if (right_stack && in_stack(*a, val))
-		right_place = (a->pivot - val) == distance(a->pivot, val, a->index, a->size);
-	else if (right_stack && in_stack(*b, val))
-		right_place = (val - b->pivot + b->size) == distance(b->pivot, val, b->index, b->size);
-	if (right_stack && right_place)
-		return (2);
-	else if (right_stack && !right_place)
-		return (1);
-	return (0);
-}
-
-void	calc_lbl_arr(stack *a, stack *b, int *arr)
+int	find_place(int val, stack *b)
 {
 	int	i;
+	int	max;
+	int	min;
 
+	max = find_max(b->arr, b->size);
+	if (max < val)
+		return (find_ind(b->arr, b->size, max));
+	min = find_min(b->arr, b->size);
+	if (min > val)
+		return ((find_ind(b->arr, b->size, min) + 1) % b->size);
+	if (val > b->arr[0] && val < b->arr[b->size - 1])
+		return (0);
 	i = -1;
-	while (++i < a->size + b->size)
-		arr[i] = calc_label(a, b, i);
+	while (++i < b->size)
+	{	
+		if (val < b->arr[i] && val > b->arr[(i + 1) % b->size])
+			return ((i + 1) % b->size);
+	}
+	return (-1);
 }
 
-int	lbls_are_better(int *old, int *new, int size)
+int	get_push_ind(stack *a, stack *b)
 {
-	return (arr_sum(new, size) > arr_sum(old, size));
+	int	i;
+	int	i1;
+	int	i2;
+	
+	i = -1;
+	i1 = -1;
+	i2 = -1;
+	while (++i < min(a->size, b->size))
+	{
+		if (i == find_place(a->arr[i], b)) {
+		//printf("place: %d\n", find_place(a->arr[i], b));
+			i1 = i;
+			break;
+		}
+	}
+	i = min(a->size, b->size) + 1;
+	while (--i > 0)
+	{
+		if (i == find_place(a->arr[i], b))
+			i2 = i;
+	}
+	if (i1 <= a->size - i2)
+		return (i1);
+	else
+		return (i2);
 }
 
-void sort(stack *a, stack *b)
+void	rotate_push(stack *a, stack *b, int push_ind)
 {
-	int	*lbl_arr;
+	int	i;
 	
-	split_stacks(a, b);
-	lbl_arr = init_lbl_arr(a, b);
-	calc_lbl_arr(a, b, lbl_arr);
-	printf("Label array: ");
-	print_arr(lbl_arr, a->size + b->size);
-	
+	i = 0;
+	if (push_ind <= max(a->size, b->size) - push_ind)
+	{
+		while (i++ < push_ind)
+			rr(a, b);
+	}
+	else
+	{
+		while (a->size > b->size && i < a->size - b->size)
+		{
+			revr(a);
+			i++;
+		}
+		while (a->size < b->size && i < b->size - a->size)
+		{
+			revr(b);
+			i++;
+		}
+		i = 0;
+		while (i++ < min(a->size, b->size) - push_ind)
+			revrr(a, b);
+	}
+	p(a, b);
+}
+
+void	sort(stack *a, stack *b)
+{
+	int	push_ind;
+
+	p(a, b);
+	p(a, b);
+	if (b->arr[0] < b->arr[1])
+		s(b);
+	while (a->size > 0)
+	{
+		//if (is_sorted(*a))
+		//	break;
+		//print_arr(a->arr, a->size);
+		//print_arr(b->arr, b->size);
+		push_ind = get_push_ind(a, b);
+		//printf("push ind: %d\n", push_ind);
+		if (push_ind != -1)
+			rotate_push(a, b, push_ind);
+		else if (a->size > b->size)
+			r(a);
+		else
+			r(b);
+	}
+	rotate_to_top(b, find_max(b->arr, b->size));
 }

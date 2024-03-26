@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   operations_sim.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 14:42:48 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:43:51 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s(stack *a)
+void	s_sim(stack *a)
 {
 	int	tmp;
 
@@ -24,12 +24,9 @@ void	s(stack *a)
 	tmp = a->index[0];
 	a->index[0] = a->index[1];
 	a->index[1] = tmp;
-	write(1, "s", 1);
-	write(1, &a->name, 1);
-	write(1, "\n", 1);
 }
 
-void	ss(stack *a, stack *b)
+void	ss_sim(stack *a, stack *b)
 {
 	int	tmp;
 	
@@ -47,7 +44,6 @@ void	ss(stack *a, stack *b)
 		tmp = b->index[0];
 		b->index[0] = b->index[1];
 		b->index[1] = tmp;
-		write(1, "ss\n", 3);
 	}
 }
 
@@ -73,7 +69,7 @@ static void	p_for_ind(stack *a, stack *b)
 	free(tmp);
 }
 
-void	p(stack *a, stack *b)
+void	p_sim(stack *a, stack *b)
 {
 	int *tmp;
 	
@@ -98,12 +94,9 @@ void	p(stack *a, stack *b)
 	a->size--;
 	free(tmp);
 	p_for_ind(a, b);
-	write(1, "p", 1);
-	write(1, &b->name, 1);
-	write(1, "\n", 1);
 }
 
-void	rr(stack *a, stack *b)
+void	rr_sim(stack *a, stack *b)
 {
 	int	tmp;
 
@@ -121,10 +114,9 @@ void	rr(stack *a, stack *b)
 	tmp = b->index[0];
 	copy_arr_until(b->index, b->index + 1, b->size - 1);
 	b->index[b->size - 1] = tmp;
-	write(1, "rr\n", 3);
 }
 
-void	r(stack *a)
+void	r_sim(stack *a)
 {
 	int	tmp;
 
@@ -136,45 +128,18 @@ void	r(stack *a)
 	tmp = a->index[0];
 	copy_arr_until(a->index, a->index + 1, a->size - 1);
 	a->index[a->size - 1] = tmp;
-	write(1, "r", 1);
-	write(1, &a->name, 1);
-	write(1, "\n", 1);
 }
 
-void	revr(stack *a)
+void	revr_sim(stack *a)
 {
 	int	tmp;
 
 	if (!a->arr || !a->index)
-		return ;
+			return ;
 	tmp = a->arr[a->size - 1];
 	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
 	a->arr[0] = tmp;
 	tmp = a->index[a->size - 1];
 	copy_arr_until(a->index + 1, a->index, a->size - 1);
 	a->index[0] = tmp;
-	write(1, "rr", 2);
-	write(1, &a->name, 1);
-	write(1, "\n", 1);
-}
-
-void	revrr(stack *a, stack *b)
-{
-	int	tmp;
-
-	if (!a->arr || a->index || b->arr || b->index)
-		return ;
-	tmp = a->arr[a->size - 1];
-	copy_arr_until(a->arr + 1, a->arr, a->size - 1);
-	a->arr[0] = tmp;
-	tmp = b->arr[b->size - 1];
-	copy_arr_until(b->arr + 1, b->arr, b->size - 1);
-	b->arr[0] = tmp;
-	tmp = a->index[a->size - 1];
-	copy_arr_until(a->index + 1, a->index, a->size - 1);
-	a->index[0] = tmp;
-	tmp = b->index[b->size - 1];
-	copy_arr_until(b->index + 1, b->index, b->size - 1);
-	b->index[0] = tmp;
-	write(1, "rrr\n", 4);
 }
