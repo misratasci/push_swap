@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:19:35 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 10:19:04 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:40:29 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ int	distance(int val1, int val2, int *a, int size)
 	
 	ind1 = find_ind(a, size, val1);
 	ind2 = find_ind(a, size, val2);
+	diff = abs(ind1 - ind2);	
+	if (diff <= size / 2)
+	{
+		return (diff);
+	}
+	else
+		return (diff - size);
+}
+
+int	ind_distance(int ind1, int ind2, int *a, int size)
+{
+	int diff;
+
 	diff = abs(ind1 - ind2);	
 	if (diff <= size / 2)
 	{
