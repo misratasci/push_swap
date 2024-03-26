@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 10:07:03 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:03:43 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct stack
 	int		*arr;
 	int 	*sorted;
 	int		*index;
+	int		pivot;
 } stack;
 
 //libft
@@ -33,7 +34,7 @@ char	**ft_split(char const *s, char c);
 
 //utils
 stack	initialize_stack_a(int argc, char **argv);
-stack	initialize_stack_b();
+stack	initialize_stack_b(stack a);
 void	clean_stack(stack a);
 void	copy_arr_until(int *dst, int *src, int n);
 int		find_max(int *a, int size);

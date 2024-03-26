@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 16:01:26 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:28:30 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	find_ind(int *a, int size, int value)
 
 	if (!a || size < 1)
 		return (-1);
-	ind = 0;
+	ind = -1;
 	i = -1;
 	while (++i < size)
 	{

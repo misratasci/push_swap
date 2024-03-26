@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 10:07:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:04:44 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ stack	initialize_stack_a(int argc, char **argv)
 	while(i < a.size)
 		a.index[i++] = 0;
 	index_init(&a);
+	a.pivot = a.size - 1;
 	return (a);
 }
 
-stack	initialize_stack_b()
+stack	initialize_stack_b(stack a)
 {
 	stack	b;
 	
@@ -100,6 +101,7 @@ stack	initialize_stack_b()
 	b.arr = NULL;
 	b.sorted = NULL;
 	b.index = NULL;
+	b.pivot = a.pivot / 2;
 	return (b);
 }
 
