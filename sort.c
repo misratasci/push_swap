@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 17:30:42 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:22:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,128 @@ void	sort_3_dec(stack *a)
 	}
 }
 
+int	check_sa(stack *a, stack *b)
+{
+	int	old;
+	int new;
+	
+	old = get_push_ind(a, b);
+	s_sim(a);
+	new = get_push_ind(a, b);
+	//printf("sa sim old push ind: %d, new: %d\n", old, new);
+	s_sim(a);
+	if (old == INT32_MAX && new == INT32_MAX)
+		return (0);
+	if (old == INT32_MAX)
+		return (abs(new));
+	if (new == INT32_MAX)
+		return (-1);
+	return (abs(old) - abs(new));
+}
+
+int	check_ra(stack *a, stack *b)
+{
+	int	old;
+	int new;
+	
+	old = get_push_ind(a, b);
+	r_sim(a);
+	new = get_push_ind(a, b);
+	//printf("ra sim old push ind: %d, new: %d\n", old, new);
+	revr_sim(a);
+	if (old == INT32_MAX && new == INT32_MAX)
+		return (0);
+	if (old == INT32_MAX)
+		return (abs(new));
+	if (new == INT32_MAX)
+		return (-1);
+	return (abs(old) - abs(new));
+}
+
+int	check_rb(stack *a, stack *b)
+{
+	int	old;
+	int new;
+	
+	old = get_push_ind(a, b);
+	r_sim(b);
+	new = get_push_ind(a, b);
+	//printf("rb sim old push ind: %d, new: %d\n", old, new);
+	revr_sim(b);
+	if (old == INT32_MAX && new == INT32_MAX)
+		return (0);
+	if (old == INT32_MAX)
+		return (abs(new));
+	if (new == INT32_MAX)
+		return (-1);
+	return (abs(old) - abs(new));
+}
+
+int	check_rra(stack *a, stack *b)
+{
+	int	old;
+	int new;
+	
+	old = get_push_ind(a, b);
+	revr_sim(a);
+	new = get_push_ind(a, b);
+	//printf("ra sim old push ind: %d, new: %d\n", old, new);
+	r_sim(a);
+	if (old == INT32_MAX && new == INT32_MAX)
+		return (0);
+	if (old == INT32_MAX)
+		return (abs(new));
+	if (new == INT32_MAX)
+		return (-1);
+	return (abs(old) - abs(new));
+}
+
+int	check_rrb(stack *a, stack *b)
+{
+	int	old;
+	int new;
+	
+	old = get_push_ind(a, b);
+	revr_sim(b);
+	new = get_push_ind(a, b);
+	//printf("rb sim old push ind: %d, new: %d\n", old, new);
+	r_sim(b);
+	if (old == INT32_MAX && new == INT32_MAX)
+		return (0);
+	if (old == INT32_MAX)
+		return (abs(new));
+	if (new == INT32_MAX)
+		return (-1);
+	return (abs(old) - abs(new));
+}
+
+int	choose_move(stack *a, stack *b)
+{
+	int	profits[5];
+	int	move;
+	
+	profits[0] = check_sa(a, b);
+	profits[1] = check_ra(a, b);
+	profits[2] = check_rb(a, b);
+	profits[3] = check_rra(a, b);
+	profits[4] = check_rrb(a, b);
+	if (all_els_eq(profits, 5) || all_els_neg(profits, 5))
+		return (-1);
+	move = find_ind(profits, 5, find_max(profits, 5));
+	//print_arr(profits, 5);
+	if (move == 0)
+		s(a);
+	if (move == 1)
+		r(a);
+	if (move == 2)
+		r(b);
+	if (move == 3)
+		revr(a);
+	if (move == 4)
+		revr(b);
+	return (profits[move]);
+}
+
 void	sort(stack *a, stack *b)
 {
 	int	push_ind;
@@ -140,6 +262,9 @@ void	sort(stack *a, stack *b)
 	sort_3_dec(b);
 	while (a->size > 3)
 	{
+		int i = 0;
+		while (i++ < 15)
+			choose_move(a, b);
 		//print_stacks(*a, *b);
 		push_ind = get_push_ind(a, b);
 		//printf("push ind: %d\n", push_ind);

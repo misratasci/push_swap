@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 15:13:19 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 20:45:49 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	calc_lbl_arr(stack *a, stack *b, int *arr)
 	while (++i < a->size + b->size)
 		arr[i] = calc_label(a, b, i);
 }
-
+/*
 int	check_ss(stack *a, stack *b, int *lbl_arr)
 {
 	int	old;
@@ -183,7 +183,7 @@ int	check_pb(stack *a, stack *b, int *lbl_arr)
 	}
 	return (0);
 }
-
+*/
 int	lbls_are_better(int *old, int *new, int size)
 {
 	return (arr_sum(new, size) > arr_sum(old, size));

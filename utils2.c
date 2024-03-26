@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 14:31:05 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 21:52:07 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,30 @@ int	arr_sum(int *arr, int size)
 	while (++i < size)
 		sum += arr[i];
 	return (sum);
+}
+
+int	all_els_eq(int *arr, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size - 1)
+	{
+		if (arr[i] != arr[i + 1])
+			return (0);
+	}
+	return (1);
+}
+
+int	all_els_neg(int *arr, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+	{
+		if (arr[i] > 0)
+			return (0);
+	}
+	return (1);
 }
