@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 22:22:24 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 23:38:53 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,126 +130,148 @@ void	sort_3_dec(stack *a)
 	}
 }
 
-int	check_sa(stack *a, stack *b)
+void	simulate_moves(stack *a, stack *b, int *moves, int move_count)
+{
+	int	i;
+	
+	i = -1;
+	while (++i < move_count)
+	{
+		if (moves[i] == 0)
+			r_sim(a);
+		else if (moves[i] == 1)
+			r_sim(b);
+		else if (moves[i] == 2)
+			s_sim(a);
+		else if (moves[i] == 3)
+			revr_sim(a);
+		else if (moves[i] == 4)
+			revr_sim(b);
+	}
+}
+
+void	reverse_moves(stack *a, stack *b, int *moves, int move_count)
+{
+	int	*rev_moves;
+	int	i;
+
+	rev_moves = (int *)malloc(sizeof(int) * move_count);
+	i = -1;
+	while (++i < move_count)
+		rev_moves[i] = 4 - moves[move_count - i];
+	simulate_moves(a, b, rev_moves, move_count);
+	free(rev_moves);
+}
+
+void	make_moves(stack *a, stack *b, int *moves, int move_count)
+{
+	int	i;
+	
+	i = -1;
+	while (++i < move_count)
+	{
+		if (moves[i] == 0)
+			r(a);
+		else if (moves[i] == 1)
+			r(b);
+		else if (moves[i] == 2)
+			s(a);
+		else if (moves[i] == 3)
+			revr(a);
+		else if (moves[i] == 4)
+			revr(b);
+	}
+}
+
+int	get_profit(stack *a, stack *b, int *moves, int move_count)
 {
 	int	old;
-	int new;
-	
+	int	new;
+
 	old = get_push_ind(a, b);
-	s_sim(a);
+	simulate_moves(a, b, moves, move_count);
 	new = get_push_ind(a, b);
-	//printf("sa sim old push ind: %d, new: %d\n", old, new);
-	s_sim(a);
+	reverse_moves(a, b, moves, move_count);
 	if (old == INT32_MAX && new == INT32_MAX)
 		return (0);
 	if (old == INT32_MAX)
-		return (abs(new));
+		return (abs(new) + move_count);
 	if (new == INT32_MAX)
 		return (-1);
-	return (abs(old) - abs(new));
+	return (abs(old) - (abs(new) + move_count));
 }
 
-int	check_ra(stack *a, stack *b)
+int **get_move_arrs1()
 {
-	int	old;
-	int new;
-	
-	old = get_push_ind(a, b);
-	r_sim(a);
-	new = get_push_ind(a, b);
-	//printf("ra sim old push ind: %d, new: %d\n", old, new);
-	revr_sim(a);
-	if (old == INT32_MAX && new == INT32_MAX)
-		return (0);
-	if (old == INT32_MAX)
-		return (abs(new));
-	if (new == INT32_MAX)
-		return (-1);
-	return (abs(old) - abs(new));
+	int	i;
+	int	*moves;
+	int	**move_arrs;
+
+	move_arrs = (int **)malloc(sizeof(int *) * 5);
+	i = -1;
+	while (++i < 5)
+	{
+		moves = (int *)malloc(sizeof(int) * 1);
+		moves[0] = i;
+		move_arrs[i] = moves;
+	}
+	return (move_arrs);
 }
 
-int	check_rb(stack *a, stack *b)
+int **get_move_arrs2()
 {
-	int	old;
-	int new;
+	int	i;
+	int	j;
+	int	*moves;
+	int **move_arrs;
 	
-	old = get_push_ind(a, b);
-	r_sim(b);
-	new = get_push_ind(a, b);
-	//printf("rb sim old push ind: %d, new: %d\n", old, new);
-	revr_sim(b);
-	if (old == INT32_MAX && new == INT32_MAX)
-		return (0);
-	if (old == INT32_MAX)
-		return (abs(new));
-	if (new == INT32_MAX)
-		return (-1);
-	return (abs(old) - abs(new));
+	move_arrs = (int **)malloc(sizeof(int *) * 25);
+	i = -1;
+	while (++i < 5)
+	{
+		j = -1;
+		while (++j < 5)
+		{
+			moves = (int *)malloc(sizeof(int) * 2);
+			moves[0] = i;
+			moves[1] = j;
+			move_arrs[i * 5 + j] = moves;
+		}
+	}
+	return (move_arrs);	
 }
 
-int	check_rra(stack *a, stack *b)
+void	simulate(stack *a, stack *b)
 {
-	int	old;
-	int new;
-	
-	old = get_push_ind(a, b);
-	revr_sim(a);
-	new = get_push_ind(a, b);
-	//printf("ra sim old push ind: %d, new: %d\n", old, new);
-	r_sim(a);
-	if (old == INT32_MAX && new == INT32_MAX)
-		return (0);
-	if (old == INT32_MAX)
-		return (abs(new));
-	if (new == INT32_MAX)
-		return (-1);
-	return (abs(old) - abs(new));
-}
+	int **move_arrs1;
+	int	**move_arrs2;
+	int	i;
+	int	profit[30];
+	int ind;
 
-int	check_rrb(stack *a, stack *b)
-{
-	int	old;
-	int new;
-	
-	old = get_push_ind(a, b);
-	revr_sim(b);
-	new = get_push_ind(a, b);
-	//printf("rb sim old push ind: %d, new: %d\n", old, new);
-	r_sim(b);
-	if (old == INT32_MAX && new == INT32_MAX)
-		return (0);
-	if (old == INT32_MAX)
-		return (abs(new));
-	if (new == INT32_MAX)
-		return (-1);
-	return (abs(old) - abs(new));
-}
-
-int	choose_move(stack *a, stack *b)
-{
-	int	profits[5];
-	int	move;
-	
-	profits[0] = check_sa(a, b);
-	profits[1] = check_ra(a, b);
-	profits[2] = check_rb(a, b);
-	profits[3] = check_rra(a, b);
-	profits[4] = check_rrb(a, b);
-	if (all_els_eq(profits, 5) || all_els_neg(profits, 5))
-		return (-1);
-	move = find_ind(profits, 5, find_max(profits, 5));
-	//print_arr(profits, 5);
-	if (move == 0)
-		s(a);
-	if (move == 1)
-		r(a);
-	if (move == 2)
-		r(b);
-	if (move == 3)
-		revr(a);
-	if (move == 4)
-		revr(b);
-	return (profits[move]);
+	move_arrs1 = get_move_arrs1();
+	move_arrs2 = get_move_arrs2();
+	i = 0;
+	while (i < 5)
+	{
+		profit[i] = get_profit(a, b, move_arrs1[i], 1);
+		i++;
+	}
+	while(i < 30)
+	{
+		profit[i] = get_profit(a, b, move_arrs2[i - 5], 2);
+		i++;
+	}
+	if (all_els_neg(profit, 30))
+		return ;
+	//printf("profit arr:\n");
+	//print_arr(profit, 30);
+	ind = find_ind(profit, 25, find_max(profit, 25));
+	//printf("ind: %d\n", ind);
+	if (ind < 5)
+		make_moves(a, b, move_arrs1[ind], 1);
+	else
+		make_moves(a, b, move_arrs2[ind], 2);
 }
 
 void	sort(stack *a, stack *b)
@@ -262,12 +284,10 @@ void	sort(stack *a, stack *b)
 	sort_3_dec(b);
 	while (a->size > 3)
 	{
-		int i = 0;
-		while (i++ < 15)
-			choose_move(a, b);
-		//print_stacks(*a, *b);
+		simulate(a, b);
+		print_stacks(*a, *b);
 		push_ind = get_push_ind(a, b);
-		//printf("push ind: %d\n", push_ind);
+		printf("push ind: %d\n", push_ind);
 		if (push_ind != INT32_MAX)
 			rotate_push(a, b, push_ind);
 		else if (a->size > b->size)
