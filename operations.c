@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 14:42:48 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:59:05 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	rr(stack *a, stack *b)
 {
 	int	tmp;
 
-	if (!a->arr || a->index || b->arr || b->index)
+	if (!a->arr || !a->index || !b->arr || !b->index)
 		return ;
 	tmp = a->arr[0];
 	copy_arr_until(a->arr, a->arr + 1, a->size - 1);
@@ -162,7 +162,7 @@ void	revrr(stack *a, stack *b)
 {
 	int	tmp;
 
-	if (!a->arr || a->index || b->arr || b->index)
+	if (!a->arr || !a->index || !b->arr || !b->index)
 		return ;
 	tmp = a->arr[a->size - 1];
 	copy_arr_until(a->arr + 1, a->arr, a->size - 1);

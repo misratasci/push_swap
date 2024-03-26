@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 15:13:28 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:30:42 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,28 @@ int	find_place(int val, stack *b)
 int	get_push_ind(stack *a, stack *b)
 {
 	int	i;
-	int	i1;
-	int	i2;
+	int	ind;
 	
 	i = -1;
-	i1 = -1;
-	i2 = -1;
+	ind = INT32_MAX;
 	while (++i < min(a->size, b->size))
 	{
 		if (i == find_place(a->arr[i], b)) {
 		//printf("place: %d\n", find_place(a->arr[i], b));
-			i1 = i;
+			ind = i;
 			break;
 		}
 	}
-	i = min(a->size, b->size) + 1;
-	while (--i > 0)
+	i = a->size;
+	while (--i > abs(a->size - b->size))
 	{
-		if (i == find_place(a->arr[i], b))
-			i2 = i;
+		if (a->size - i == b->size - find_place(a->arr[i], b))
+		{
+			if (ind == -1 || ind > a->size - i)
+				ind = i - a->size;
+		}
 	}
-	if (i1 <= a->size - i2)
-		return (i1);
-	else
-		return (i2);
+	return (ind);
 }
 
 void	rotate_push(stack *a, stack *b, int push_ind)
@@ -82,28 +80,54 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 	int	i;
 	
 	i = 0;
-	if (push_ind <= max(a->size, b->size) - push_ind)
+	//printf("hello\n");
+	while (push_ind >= 0 && i++ < push_ind)
+		rr(a, b);
+	while (push_ind < 0 && i++ < -push_ind)
+		revrr(a, b);
+	p(a, b);
+}
+
+void	sort_3_inc(stack *a)
+{
+	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+		return ;
+	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
 	{
-		while (i++ < push_ind)
-			rr(a, b);
+		s(a);
+		r(a);
 	}
+	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
+		s(a);
+	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
+		revr(a);
+	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
+		r(a);
 	else
 	{
-		while (a->size > b->size && i < a->size - b->size)
-		{
-			revr(a);
-			i++;
-		}
-		while (a->size < b->size && i < b->size - a->size)
-		{
-			revr(b);
-			i++;
-		}
-		i = 0;
-		while (i++ < min(a->size, b->size) - push_ind)
-			revrr(a, b);
+		s(a);
+		revr(a);
 	}
-	p(a, b);
+}
+
+void	sort_3_dec(stack *a)
+{
+	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+	{
+		s(a);
+		revr(a);
+	}
+	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
+		r(a);
+	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
+		revr(a);
+	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
+		s(a);
+	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
+	{
+		revr(a);
+		s(a);
+	}
 }
 
 void	sort(stack *a, stack *b)
@@ -112,17 +136,14 @@ void	sort(stack *a, stack *b)
 
 	p(a, b);
 	p(a, b);
-	if (b->arr[0] < b->arr[1])
-		s(b);
-	while (a->size > 0)
+	p(a, b);
+	sort_3_dec(b);
+	while (a->size > 3)
 	{
-		//if (is_sorted(*a))
-		//	break;
-		//print_arr(a->arr, a->size);
-		//print_arr(b->arr, b->size);
+		//print_stacks(*a, *b);
 		push_ind = get_push_ind(a, b);
 		//printf("push ind: %d\n", push_ind);
-		if (push_ind != -1)
+		if (push_ind != INT32_MAX)
 			rotate_push(a, b, push_ind);
 		else if (a->size > b->size)
 			r(a);

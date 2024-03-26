@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 14:43:51 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:59:29 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	rr_sim(stack *a, stack *b)
 {
 	int	tmp;
 
-	if (!a->arr || a->index || b->arr || b->index)
+	if (!a->arr || !a->index || !b->arr || !b->index)
 		return ;
 	tmp = a->arr[0];
 	copy_arr_until(a->arr, a->arr + 1, a->size - 1);
