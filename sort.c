@@ -6,14 +6,15 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/25 19:48:07 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 09:39:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 void sort(stack *a, stack *b)
 {
 	int i;
 	
 }
+*/

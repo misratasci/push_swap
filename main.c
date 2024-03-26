@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/25 19:47:45 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 09:39:37 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	split_stacks(stack *a, stack *b)
 	//printf("middle: %d\n", middle);
 	while (++i < size)
 	{
-		//printf("top: %d\n", a->top);
-		if (a->top < middle)
+		//printf("top: %d\n", a->arr[0]);
+		if (a->arr[0] < middle)
 			p(a, b);
 		else
 			r(a);
@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 	
 	print_arr(a.arr, a.size);
 	print_arr(a.sorted, a.size);
+	print_arr(a.index, a.size);
 	//print_arr(b.arr, b.size);
 
 	//sort(&a, &b);
