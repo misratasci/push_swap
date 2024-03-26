@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 09:42:12 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:07:50 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,14 @@ void	print_arr(int *a, int size) //bunu sonradan sil
 	while (++i < size)
 		printf("%d, ", a[i]);
 	printf("}\n");
+}
+
+void	print_stacks(stack a, stack b) //bunu da sil
+{
+	printf("Stack A:\n");
+	print_arr(a.arr, a.size);
+	print_arr(a.index, a.size);
+	printf("Stack B:\n");
+	print_arr(b.arr, b.size);
+	print_arr(b.index, b.size);
 }

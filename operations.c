@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 09:38:36 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:04:51 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	s(stack *a)
 	tmp = a->arr[0];
 	a->arr[0] = a->arr[1];
 	a->arr[1] = tmp;
+	tmp = a->index[0];
+	a->index[0] = a->index[1];
+	a->index[1] = tmp;
 	write(1, "s", 1);
 	write(1, &a->name, 1);
 	write(1, "\n", 1);
@@ -35,11 +38,39 @@ void	ss(stack *a, stack *b)
 		tmp = a->arr[0];
 		a->arr[0] = a->arr[1];
 		a->arr[1] = tmp;
+		tmp = a->index[0];
+		a->index[0] = a->index[1];
+		a->index[1] = tmp;
 		tmp = b->arr[0];
 		b->arr[0] = b->arr[1];
 		b->arr[1] = tmp;
+		tmp = b->index[0];
+		b->index[0] = b->index[1];
+		b->index[1] = tmp;
 		write(1, "ss\n", 3);
 	}
+}
+
+static void	p_for_ind(stack *a, stack *b)
+{
+	int *tmp;
+	
+	tmp = (int *)malloc(sizeof(int) * (b->size));
+	tmp[0] = a->index[0];
+	if (b->size - 1 > 0)
+	{
+		copy_arr_until(tmp + 1, b->index, b->size - 1);
+		free(b->index);
+	}
+	b->index = (int *)malloc(sizeof(int) * (b->size));
+	copy_arr_until(b->index, tmp, b->size);
+	free(tmp);
+	tmp = (int *)malloc(sizeof(int) * (a->size));
+	copy_arr_until(tmp, a->index + 1, a->size);
+	free(a->index);
+	a->index = (int *)malloc(sizeof(int) * (a->size));
+	copy_arr_until(a->index, tmp, a->size);
+	free(tmp);
 }
 
 void	p(stack *a, stack *b)
@@ -66,6 +97,7 @@ void	p(stack *a, stack *b)
 	copy_arr_until(a->arr, tmp, a->size - 1);
 	a->size--;
 	free(tmp);
+	p_for_ind(a, b);
 	write(1, "p", 1);
 	write(1, &b->name, 1);
 	write(1, "\n", 1);

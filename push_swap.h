@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 09:35:56 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:07:03 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		find_next_min(int *a, int size, int prev_min);
 int		find_next_max(int *a, int size, int prev_max);
 int		find_ind(int *a, int size, int value);
 void	print_arr(int *a, int size); //sil
+void	print_stacks(stack a, stack b); //sil
 
 //operations
 void	s(stack *a);
