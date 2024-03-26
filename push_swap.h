@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 11:40:42 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:31:28 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		find_middle(int *a, int size);
 int		find_next_min(int *a, int size, int prev_min);
 int		find_next_max(int *a, int size, int prev_max);
 int		find_ind(int *a, int size, int value);
+int		count_val(int *arr, int size, int val);
+int		arr_sum(int *arr, int size);
 void	print_arr(int *a, int size); //sil
 void	print_stacks(stack a, stack b); //sil
 
@@ -58,7 +60,7 @@ int		min(int a, int b);
 int		max(int a, int b);
 int		abs(int a);
 int		distance(int val1, int val2, int *a, int size);
-int		ind_distance(int ind1, int ind2, int *a, int size);
+int		ind_distance(int ind1, int ind2, int size);
 void	r_sim(stack *a);
 void	revr_sim(stack *a);
 

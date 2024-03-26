@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 11:47:40 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:32:49 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,59 @@ int	in_stack(stack a, int val)
 }
 
 /*
-0: right stack, wrong place
-1: right stack, right place
-2: wrong stack, wrong place
-3: wrong stack, right place 
+0: wrong stack, wrong place
+1: right stack, wrong place
+2: right stack, right place
+3: wrong stack, right place, can reach with rr (in first half of stack)
+4: wrong stack, right place, can reach with rrr (in second half)
+-1: is pivot a
+-2: is pivot b
+
+(3 ve 4ü sonra yaparım kafam basmadı)
 */
 int	calc_label(stack *a, stack *b, int val)
 {
 	int	right_stack;
 	int	right_place;
 
+	if (val == a->pivot)
+		return (-1);
+	if (val == b->pivot)
+		return (-2);
 	right_stack = (val > b->pivot && in_stack(*a, val)) || (val < b->pivot && in_stack(*b, val));
 	if (right_stack && in_stack(*a, val))
 		right_place = (a->pivot - val) == distance(a->pivot, val, a->index, a->size);
 	else if (right_stack && in_stack(*b, val))
-		right_place = (b->pivot - val) == distance(b->pivot, val, b->index, b->size);
-	
-	return (right_place);
+		right_place = (val - b->pivot + b->size) == distance(b->pivot, val, b->index, b->size);
+	if (right_stack && right_place)
+		return (2);
+	else if (right_stack && !right_place)
+		return (1);
+	return (0);
 }
-/*
+
 void	calc_lbl_arr(stack *a, stack *b, int *arr)
 {
-	
+	int	i;
+
+	i = -1;
+	while (++i < a->size + b->size)
+		arr[i] = calc_label(a, b, i);
 }
-*/
+
+int	lbls_are_better(int *old, int *new, int size)
+{
+	return (arr_sum(new, size) > arr_sum(old, size));
+}
+
 void sort(stack *a, stack *b)
 {
+	int	*lbl_arr;
+	
 	split_stacks(a, b);
-	init_lbl_arr(a, b);
-	calc_label(a, 18);
+	lbl_arr = init_lbl_arr(a, b);
+	calc_lbl_arr(a, b, lbl_arr);
+	printf("Label array: ");
+	print_arr(lbl_arr, a->size + b->size);
+	
 }

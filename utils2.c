@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 11:28:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:31:05 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,31 @@ int	find_next_max(int *a, int size, int prev_max)
 		i++;
 	}
 	return (res);
+}
+
+int	count_val(int *arr, int size, int val)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = -1;
+	while (++i < size)
+	{
+		if (arr[i] == val)
+			count++;
+	}
+	return (count);
+}
+
+int	arr_sum(int *arr, int size)
+{
+	int	sum;
+	int	i;
+
+	sum = 0;
+	i = -1;
+	while (++i < size)
+		sum += arr[i];
+	return (sum);
 }
