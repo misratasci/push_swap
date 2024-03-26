@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 23:38:53 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 23:54:23 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,12 +262,12 @@ void	simulate(stack *a, stack *b)
 		profit[i] = get_profit(a, b, move_arrs2[i - 5], 2);
 		i++;
 	}
+	printf("profit arr:\n");
+	print_arr(profit, 30);
 	if (all_els_neg(profit, 30))
 		return ;
-	//printf("profit arr:\n");
-	//print_arr(profit, 30);
 	ind = find_ind(profit, 25, find_max(profit, 25));
-	//printf("ind: %d\n", ind);
+	printf("ind: %d\n", ind);
 	if (ind < 5)
 		make_moves(a, b, move_arrs1[ind], 1);
 	else
@@ -282,10 +282,10 @@ void	sort(stack *a, stack *b)
 	p(a, b);
 	p(a, b);
 	sort_3_dec(b);
-	while (a->size > 3)
+	while (a->size > 0)
 	{
-		simulate(a, b);
 		print_stacks(*a, *b);
+		simulate(a, b);
 		push_ind = get_push_ind(a, b);
 		printf("push ind: %d\n", push_ind);
 		if (push_ind != INT32_MAX)
