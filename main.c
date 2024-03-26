@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 10:08:29 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:12:21 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,9 @@ int	main(int argc, char **argv)
 	b = initialize_stack_b();
 	
 	print_stacks(a, b);
-	p(&a, &b);
+	rr(&a, &b);
 	print_stacks(a, b);
-	p(&a, &b);
-	print_stacks(a, b);
-	p(&a, &b);
-	print_stacks(a, b);
+
 	//print_arr(b.arr, b.size);
 
 	//sort(&a, &b);
