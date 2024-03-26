@@ -6,11 +6,57 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:25:23 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/19 16:02:21 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:27:40 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*
+//önceden sort edip medyanını bulmayı dene
+void	equalize_stacks(stack *a, stack *b)
+{
+	int val;
+	
+	if (a->size == b->size)
+		return ;
+	while (a->size > b->size)
+	{
+		val = find_min(a->arr, a->size);
+		rotate_to_top(a, val);
+		p(a, b);
+	}
+	while (a->size < b->size)
+	{
+		val = find_max(b->arr, b->size);
+		rotate_to_top(b, val);
+		p(b, a);
+	}
+}
+
+void	split_stacks(stack *a, stack *b)
+{
+	int middle;
+	int	i;
+	int	size;
+
+	size = a->size;
+	middle = (find_max(a->arr, a->size) + find_min(a->arr, a->size)) / 2;
+	i = -1;
+	//printf("middle: %d\n", middle);
+	while (++i < size)
+	{
+		//printf("top: %d\n", a->arr[0]);
+		if (a->arr[0] < middle)
+			p(a, b);
+		else
+			r(a);
+		//print_arr(a->arr, a->size);
+		//print_arr(b->arr, b->size);
+	}
+	equalize_stacks(a, b);
+}
+*/
 
 void	rotate_to_top(stack *a, int val)
 {

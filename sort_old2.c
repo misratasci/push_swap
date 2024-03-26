@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:22:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 09:38:54 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/26 10:23:08 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	rotate_push(stack *a, stack *b, int push_ind)
 	}
 	p(a, b);
 }
-
+/*
 void	sort(stack *a, stack *b)
 {
 	int	push_ind;
@@ -131,3 +131,4 @@ void	sort(stack *a, stack *b)
 	}
 	rotate_to_top(b, find_max(b->arr, b->size));
 }
+*/
