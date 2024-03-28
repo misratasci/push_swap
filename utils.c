@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 15:19:28 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 10:38:51 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ void	clean_stack(stack a)
 {
 	if (a.arr)
 		free(a.arr);
+	if (a.sorted)
+		free(a.sorted);
+	if (a.index)
+		free(a.index);
 }
 
 void	copy_arr_until(int *dst, int *src, int n)
@@ -143,9 +147,9 @@ void	print_arr(int *a, int size) //bunu sonradan sil
 void	print_stacks(stack a, stack b) //bunu da sil
 {
 	printf("Stack A:\n");
-	print_arr(a.arr, a.size);
-	//print_arr(a.index, a.size);
+	//print_arr(a.arr, a.size);
+	print_arr(a.index, a.size);
 	printf("Stack B:\n");
-	print_arr(b.arr, b.size);
-	//print_arr(b.index, b.size);
+	//print_arr(b.arr, b.size);
+	print_arr(b.index, b.size);
 }

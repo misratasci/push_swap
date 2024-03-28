@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 21:52:07 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 10:27:37 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,96 @@ int	all_els_neg(int *arr, int size)
 			return (0);
 	}
 	return (1);
+}
+
+void	sort_3_inc(stack *a)
+{
+	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+		return ;
+	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
+	{
+		s(a);
+		r(a);
+	}
+	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
+		s(a);
+	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
+		revr(a);
+	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
+		r(a);
+	else
+	{
+		s(a);
+		revr(a);
+	}
+}
+
+void	sort_3_dec(stack *a)
+{
+	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+	{
+		s(a);
+		revr(a);
+	}
+	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
+		r(a);
+	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
+		revr(a);
+	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
+		s(a);
+	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
+	{
+		revr(a);
+		s(a);
+	}
+}
+
+void	sort_3_inc_dig(stack *a, int digit)
+{
+	int	*dig_arr;
+
+	dig_arr = get_digit_arr(*a, digit);
+	if (dig_arr[0] < dig_arr[1] && dig_arr[1] < dig_arr[2])
+		return ;
+	else if (dig_arr[0] < dig_arr[2] && dig_arr[2] < dig_arr[1])
+	{
+		s(a);
+		r(a);
+	}
+	else if (dig_arr[1] < dig_arr[0] && dig_arr[0] < dig_arr[2])
+		s(a);
+	else if (dig_arr[2] < dig_arr[0] && dig_arr[0] < dig_arr[1])
+		revr(a);
+	else if (dig_arr[1] < dig_arr[2] && dig_arr[2] < dig_arr[0])
+		r(a);
+	else
+	{
+		s(a);
+		revr(a);
+	}
+	free(dig_arr);
+}
+
+void	sort_3_dec_dig(stack *a, int digit)
+{
+	int	*dig_arr;
+
+	dig_arr = get_digit_arr(*a, digit);
+	if (dig_arr[0] < dig_arr[1] && dig_arr[1] < dig_arr[2])
+	{
+		s(a);
+		revr(a);
+	}
+	else if (dig_arr[0] < dig_arr[2] && dig_arr[2] < dig_arr[1])
+		r(a);
+	else if (dig_arr[1] < dig_arr[0] && dig_arr[0] < dig_arr[2])
+		revr(a);
+	else if (dig_arr[2] < dig_arr[0] && dig_arr[0] < dig_arr[1])
+		s(a);
+	else if (dig_arr[1] < dig_arr[2] && dig_arr[2] < dig_arr[0])
+	{
+		revr(a);
+		s(a);
+	}
+	free(dig_arr);
 }

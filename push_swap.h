@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 21:52:17 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 10:28:04 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ int		count_val(int *arr, int size, int val);
 int		arr_sum(int *arr, int size);
 int		all_els_eq(int *arr, int size);
 int		all_els_neg(int *arr, int size);
+void	sort_3_inc(stack *a);
+void	sort_3_dec(stack *a);
+void	sort_3_inc_dig(stack *a, int digit);
+void	sort_3_dec_dig(stack *a, int digit);
 void	print_arr(int *a, int size); //sil
 void	print_stacks(stack a, stack b); //sil
 
@@ -80,12 +84,7 @@ void	split_stacks(stack *a, stack *b);
 
 //sort
 void	sort(stack *a, stack *b);
-void	sort_dec(stack *a);
-void	sort_inc(stack *a);
-void	rotate_to_top(stack *a, int val);
-void	rotate_to_top_together(stack *a, stack *b, int val_a, int val_b);
-void	move_down_together(stack *a, stack *b, int dist_a, int dist_b);
-void	move_up_together(stack *a, stack *b, int dist_a, int dist_b);
-int		is_sorted(stack a);
+int 	get_digit(int a, int digit);
+int		*get_digit_arr(stack a, int digit);
 
 #endif
