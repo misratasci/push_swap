@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 16:24:11 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 19:42:54 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 
 	//print_stacks(a, b);
 	
-	merge_stacks(&a, &b);
+	//merge_stacks(&a, &b);
 	
 	clean_stack(a);
 	clean_stack(b);
