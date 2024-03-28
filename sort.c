@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:59:31 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 10:52:08 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 10:57:25 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	get_push_ind_dec(stack *a, stack *b, int digit)
 	ind = INT32_MAX;
 	while (++i < min(a->size, b->size))
 	{
-		if (i == find_place_dec(a->arr[i], digit, b)) {
-		//printf("place: %d\n", find_place(a->arr[i], b));
+		if (i == find_place_dec(dig_arr[i], digit, b)) {
+		//printf("place: %d\n", find_place(dig_arr[i], b));
 			ind = i;
 			break;
 		}
@@ -90,7 +90,7 @@ int	get_push_ind_dec(stack *a, stack *b, int digit)
 	i = a->size;
 	while (--i > abs(a->size - b->size))
 	{
-		if (a->size - i == b->size - find_place_dec(a->arr[i], digit, b))
+		if (a->size - i == b->size - find_place_dec(dig_arr[i], digit, b))
 		{
 			if (ind == -1 || ind > a->size - i)
 				ind = i - a->size;
@@ -100,13 +100,38 @@ int	get_push_ind_dec(stack *a, stack *b, int digit)
 	return (ind);
 }
 
+void	rotate_push(stack *a, stack *b, int push_ind)
+{
+	int	i;
+	
+	i = 0;
+	//printf("hello\n");
+	while (push_ind >= 0 && i++ < push_ind)
+		rr(a, b);
+	while (push_ind < 0 && i++ < -push_ind)
+		revrr(a, b);
+	p(a, b);
+}
+
 void	sort(stack *a, stack *b)
 {
+	int	push_ind;
+	
 	p(a, b);
 	p(a, b);
 	p(a, b);
 	sort_3_dec_dig(a, 1);
-	print_stacks(*a, *b);
-	printf("push ind: %d\n", get_push_ind_dec(a, b, 1));
+	while (a->size > 0)
+	{
+		print_stacks(*a, *b);
+		push_ind = get_push_ind_dec(a, b, 1);
+		printf("push ind: %d\n", push_ind);
+		if (push_ind != INT32_MAX)
+			rotate_push(a, b, push_ind);
+		else if (a->size > b->size)
+			r(a);
+		else
+			r(b);
+	}
 	
 }
