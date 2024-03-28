@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:59:31 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 10:47:38 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 10:52:08 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	find_place_dec(int val, int digit, stack *b)
 	free(dig_arr);
 	return (res);
 }
-/*
-int	get_push_ind_dig(stack *a, stack *b, int digit)
+
+int	get_push_ind_dec(stack *a, stack *b, int digit)
 {
 	int	i;
 	int	ind;
@@ -81,7 +81,7 @@ int	get_push_ind_dig(stack *a, stack *b, int digit)
 	ind = INT32_MAX;
 	while (++i < min(a->size, b->size))
 	{
-		if (i == find_place(a->arr[i], b)) {
+		if (i == find_place_dec(a->arr[i], digit, b)) {
 		//printf("place: %d\n", find_place(a->arr[i], b));
 			ind = i;
 			break;
@@ -90,15 +90,16 @@ int	get_push_ind_dig(stack *a, stack *b, int digit)
 	i = a->size;
 	while (--i > abs(a->size - b->size))
 	{
-		if (a->size - i == b->size - find_place(a->arr[i], b))
+		if (a->size - i == b->size - find_place_dec(a->arr[i], digit, b))
 		{
 			if (ind == -1 || ind > a->size - i)
 				ind = i - a->size;
 		}
 	}
+	free(dig_arr);
 	return (ind);
 }
-*/
+
 void	sort(stack *a, stack *b)
 {
 	p(a, b);
@@ -106,6 +107,6 @@ void	sort(stack *a, stack *b)
 	p(a, b);
 	sort_3_dec_dig(a, 1);
 	print_stacks(*a, *b);
-	printf("place: %d\n", find_place_dec(1, 1, b));
+	printf("push ind: %d\n", get_push_ind_dec(a, b, 1));
 	
 }
