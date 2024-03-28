@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 13:58:26 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 16:27:36 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	sort_3_dec(stack *a)
 		s(a);
 	}
 }
-
+/*
 void	sort_3_inc_dig(stack *a, int digit)
 {
 	int	*dig_arr;
@@ -255,3 +255,4 @@ void	sort_3_dec_dig(stack *a, int digit)
 	}
 	free(dig_arr);
 }
+*/

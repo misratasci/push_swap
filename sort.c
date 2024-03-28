@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 16:14:26 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 16:45:30 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	push_to_a(stack *a, stack *b, int digit)
 	{
 		while (i++ < size)
 		{
-			print_stacks(*a, *b);
-			printf("a: %d - i: %d\n", get_digit(b->index[0], digit), i);
+			//print_stacks(*a, *b);
+			//printf("a: %d - i: %d\n", get_digit(b->index[0], digit), i);
 			if (dig == get_digit(b->index[0], digit))
 				p(b, a);
 			else
@@ -80,5 +80,6 @@ void	push_to_a(stack *a, stack *b, int digit)
 void	sort(stack *a, stack *b)
 {
 	push_to_b(a, b, 1);
-	push_to_a(a, b, 2);
+	//push_to_a(a, b, 2);
+	//push_to_b(a, b, 3);
 }
