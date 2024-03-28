@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 19:40:17 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 19:53:28 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	*sorted_init(stack *a)
 	curr_min = find_min(a->arr, a->size);
 	sorted[i] = curr_min;
 	while (++i < a->size)
-		sorted[i] = find_next_min(a->arr, a->size, sorted[i - 1]);
+		sorted[i - 1] = find_next_min(a->arr, a->size, sorted[i - 2]);
 	return (sorted);
 }
 

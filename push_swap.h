@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 17:01:11 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 19:48:18 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct stack
 
 //libft
 int		ft_atoi(const char *str);
-void	ft_putendl_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 
 //utils
@@ -38,7 +37,7 @@ void	clean_stack(stack a);
 void	copy_arr_until(int *dst, int *src, int n);
 int		find_max(int *a, int size);
 int		find_min(int *a, int size);
-int		find_middle(int *a, int size);
+//int		find_middle(int *a, int size);
 int		find_next_min(int *a, int size, int prev_min);
 int		find_next_max(int *a, int size, int prev_max);
 int		find_ind(int *a, int size, int value);
@@ -78,12 +77,12 @@ void	rr_sim(stack *a, stack *b);
 void	revr_sim(stack *a);
 void	revrr_sim(stack *a, stack *b);
 
-//main
-void	split_stacks(stack *a, stack *b);
-
 //sort
 void	sort(stack *a, stack *b);
 int 	get_digit(int a, int digit);
 int		*get_digit_arr(stack a, int digit);
+
+//main
+void	merge_stacks(stack *a, stack *b);
 
 #endif

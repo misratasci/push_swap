@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 16:52:24 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 19:48:46 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	sort(stack *a, stack *b)
 	push_to_b(a, b, 1);
 	//print_stacks(*a, *b);
 	push_to_a(a, b, 2);
+	merge_stacks(a, b);
 	//print_stacks(*a, *b);
 	push_to_b(a, b, 3);
 	//print_stacks(*a, *b);
