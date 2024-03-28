@@ -6,31 +6,37 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 10:38:51 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 17:01:32 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sorted_init(stack *a)
+static int	*sorted_init(stack *a)
 {
 	int curr_min;
 	int	i;
-
+	int	*sorted;
+	
+	sorted = (int*)malloc(sizeof(int) * a->size);
 	i = 0;
 	curr_min = find_min(a->arr, a->size);
-	a->sorted[i] = curr_min;
+	sorted[i] = curr_min;
 	while (++i < a->size)
 		a->sorted[i] = find_next_min(a->arr, a->size, a->sorted[i - 1]);
+	return (sorted);
 }
 
 static void	index_init(stack *a)
 {
 	int	i;
+	int	*sorted;
 
+	sorted = sorted_init(a);
 	i = -1;
 	while (++i < a->size)
-		a->index[i] = find_ind(a->sorted, a->size, a->arr[i]);
+		a->index[i] = find_ind(sorted, a->size, a->arr[i]);
+	free(sorted);
 }
 
 int	listlen(char **l)
@@ -78,11 +84,6 @@ stack	initialize_stack_a(int argc, char **argv)
 		while (++i < a.size)
 			a.arr[i] = ft_atoi(argv[i + 1]);
 	}
-	a.sorted = (int*)malloc(sizeof(int) * a.size);
-	i = 0;
-	while(i < a.size)
-		a.sorted[i++] = 0;
-	sorted_init(&a);
 	a.index = (int*)malloc(sizeof(int) * a.size);
 	i = 0;
 	while(i < a.size)
@@ -99,7 +100,6 @@ stack	initialize_stack_b(stack a)
 	b.name = 'b';
 	b.size = 0;
 	b.arr = NULL;
-	b.sorted = NULL;
 	b.index = NULL;
 	b.pivot = a.pivot / 2;
 	return (b);

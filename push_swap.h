@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 10:28:04 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/28 17:01:11 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct stack
 	char	name;
 	int		size;
 	int		*arr;
-	int 	*sorted;
 	int		*index;
 	int		pivot;
 } stack;
