@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 19:48:18 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 12:59:02 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct stack
 	char	name;
 	int		size;
 	int		*arr;
+	int 	*sorted;
 	int		*index;
 	int		pivot;
 } stack;
@@ -43,12 +44,6 @@ int		find_next_max(int *a, int size, int prev_max);
 int		find_ind(int *a, int size, int value);
 int		count_val(int *arr, int size, int val);
 int		arr_sum(int *arr, int size);
-int		all_els_eq(int *arr, int size);
-int		all_els_neg(int *arr, int size);
-void	sort_3_inc(stack *a);
-void	sort_3_dec(stack *a);
-void	sort_3_inc_dig(stack *a, int digit);
-void	sort_3_dec_dig(stack *a, int digit);
 void	print_arr(int *a, int size); //sil
 void	print_stacks(stack a, stack b); //sil
 
@@ -68,21 +63,17 @@ int		ind_distance(int ind1, int ind2, int size);
 void	r_sim(stack *a);
 void	revr_sim(stack *a);
 
-//operations sim
-void	s_sim(stack *a);
-void	ss_sim(stack *a, stack *b);
-void	p_sim(stack *a, stack *b);
-void	r_sim(stack *a);
-void	rr_sim(stack *a, stack *b);
-void	revr_sim(stack *a);
-void	revrr_sim(stack *a, stack *b);
+//main
+void	split_stacks(stack *a, stack *b);
 
 //sort
 void	sort(stack *a, stack *b);
-int 	get_digit(int a, int digit);
-int		*get_digit_arr(stack a, int digit);
-
-//main
-void	merge_stacks(stack *a, stack *b);
+void	sort_dec(stack *a);
+void	sort_inc(stack *a);
+void	rotate_to_top(stack *a, int val);
+void	rotate_to_top_together(stack *a, stack *b, int val_a, int val_b);
+void	move_down_together(stack *a, stack *b, int dist_a, int dist_b);
+void	move_up_together(stack *a, stack *b, int dist_a, int dist_b);
+int		is_sorted(stack a);
 
 #endif
