@@ -6,25 +6,41 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 11:14:44 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 11:32:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	split_stacks(stack *a, stack *b)
+static void	split_from_front(stack *a, stack *b)
 {
-	printf("Pivot A: %d, Pivot B: %d\n", a->pivot, b->pivot);
 	while (b->size < a->size)
 	{
 		if (a->index[0] == a->pivot)
-			r(a);
+				r(a);
 		else
 			p(a, b);
-		if (find_ind(a->index, a->size, b->pivot) > a->size / 2)
-			revr(a);
 	}
+}
 
+static void	split_from_back(stack *a, stack *b)
+{
+	while (b->size < a->size)
+	{
+		revr(a);
+		if (a->index[0] == a->pivot)
+			revr(a);
+		p(a, b);
+	}
+}
+
+void	split_stacks(stack *a, stack *b)
+{
+	printf("Pivot A: %d, Pivot B: %d\n", a->pivot, b->pivot);
+	if (find_ind(a->index, a->size, b->pivot) <= a->size / 2)
+		split_from_front(a, b);
+	else
+		split_from_back(a, b);
 }
 
 int	*init_lbl_arr(stack *a, stack *b)
