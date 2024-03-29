@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 11:48:43 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 12:51:37 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,42 @@ int	right_stack(stack a, stack b, int val)
 	return ((in_stack(a, val) && val > b.pivot) || (in_stack(b, val) && val < b.pivot));
 }
 
-int	right_place(stack a, stack b, int val)
+static int	right_place_in_a(stack a, int val)
 {
-	
+	int	piv_ind;
+	int	val_ind;
+	int	dist;
+
+	piv_ind = find_ind(a.index, a.size, a.pivot);
+	val_ind = find_ind(a.index, a.size, val);
+	dist = piv_ind - val_ind;
+	if (val_ind > piv_ind)
+		dist = piv_ind - val_ind + a.size;
+	return (dist == a.pivot - val);
 }
 
+static int	right_place_in_b(stack b, int val)
+{
+	int	piv_ind;
+	int	val_ind;
+	int	dist;
+
+	piv_ind = find_ind(b.index, b.size, b.pivot);
+	val_ind = find_ind(b.index, b.size, val);
+	dist = (-1) * (piv_ind - val_ind);
+	if (piv_ind > val_ind)
+		dist = piv_ind - val_ind + b.size;
+	return (dist == b.pivot - val);
+}
+
+int	right_place(stack a, stack b, int val)
+{
+	if (in_stack(a, val) && right_stack(a, b, val))
+		return (right_place_in_a(a, val));
+	if (in_stack(b, val) && right_stack(a, b, val))
+		return (right_place_in_b(b, val));
+	return (0);
+}
 
 /*
 0: wrong stack, wrong place
@@ -84,19 +115,13 @@ int	right_place(stack a, stack b, int val)
 */
 int	calc_label(stack a, stack b, int val)
 {
-	int	right_place;
-
 	if (val == a.pivot)
 		return (-1);
 	if (val == b.pivot)
 		return (-2);
-	if (right_stack(a, b, val) && in_stack(a, val))
-		right_place = (a.pivot - val) == distance(a.pivot, val, a.index, a.size);
-	else if (right_stack(a, b, val) && in_stack(b, val))
-		right_place = (val - b.pivot + b.size) == distance(b.pivot, val, b.index, b.size);
-	if (right_stack(a, b, val) && right_place)
+	if (right_stack(a, b, val) && right_place(a, b, val))
 		return (2);
-	else if (right_stack(a, b, val) && !right_place)
+	else if (right_stack(a, b, val) && !right_place(a, b, val))
 		return (1);
 	return (0);
 }
@@ -122,6 +147,7 @@ void sort(stack *a, stack *b)
 	split_stacks(a, b);
 	lbl_arr = init_lbl_arr(a, b);
 	calc_lbl_arr(*a, *b, lbl_arr);
+	//printf("right place : %d\n", right_place(*a, *b, 2));
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
 	
