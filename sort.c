@@ -5,84 +5,124 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/28 16:52:24 by mitasci          ###   ########.fr       */
+/*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
+/*   Updated: 2024/03/29 11:48:43 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_digit(int a, int digit)
+static void	split_from_front(stack *a, stack *b)
 {
-	int	i;
-	int	res;
-
-	i = 0;
-	while (i < digit)
+	while (b->size < a->size)
 	{
-		res = a % 10;
-		a /= 10;
-		i++;
-	}
-	return (res);
-}
-
-void	push_to_b(stack *a, stack *b, int digit)
-{
-	int	i;
-	int	dig;
-	int	size;
-	
-	dig = 0;
-	i = 0;
-	size = a->size;
-	while (dig < 10)
-	{
-		while (i++ < size)
-		{
-			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
-			if (dig == get_digit(a->index[0], digit))
-				p(a, b);
-			else
+		if (a->index[0] == a->pivot)
 				r(a);
-		}
-		i = 0;
-		dig++;
+		else
+			p(a, b);
 	}
 }
 
-void	push_to_a(stack *a, stack *b, int digit)
+static void	split_from_back(stack *a, stack *b)
+{
+	while (b->size < a->size)
+	{
+		revr(a);
+		if (a->index[0] == a->pivot)
+			revr(a);
+		p(a, b);
+	}
+}
+
+void	split_stacks(stack *a, stack *b)
+{
+	printf("Pivot A: %d, Pivot B: %d\n", a->pivot, b->pivot);
+	if (find_ind(a->index, a->size, b->pivot) <= a->size / 2)
+		split_from_front(a, b);
+	else
+		split_from_back(a, b);
+}
+
+int	*init_lbl_arr(stack *a, stack *b)
+{
+	int	*lbl_arr;
+	int	i;
+
+	lbl_arr = (int *)malloc(sizeof(int) * (a->size + b->size));
+	i = -1;
+	while (++i < a->size + b->size)
+		lbl_arr[i] = 0;
+	return (lbl_arr);
+}
+
+int	in_stack(stack a, int val)
+{
+	return (find_ind(a.index, a.size, val) != -1);
+}
+
+int	right_stack(stack a, stack b, int val)
+{
+	return ((in_stack(a, val) && val > b.pivot) || (in_stack(b, val) && val < b.pivot));
+}
+
+int	right_place(stack a, stack b, int val)
+{
+	
+}
+
+
+/*
+0: wrong stack, wrong place
+1: right stack, wrong place
+2: right stack, right place
+3: wrong stack, right place, can reach with rr (in first half of stack)
+4: wrong stack, right place, can reach with rrr (in second half)
+-1: is pivot a
+-2: is pivot b
+
+(3 ve 4ü sonra yaparım kafam basmadı)
+*/
+int	calc_label(stack a, stack b, int val)
+{
+	int	right_place;
+
+	if (val == a.pivot)
+		return (-1);
+	if (val == b.pivot)
+		return (-2);
+	if (right_stack(a, b, val) && in_stack(a, val))
+		right_place = (a.pivot - val) == distance(a.pivot, val, a.index, a.size);
+	else if (right_stack(a, b, val) && in_stack(b, val))
+		right_place = (val - b.pivot + b.size) == distance(b.pivot, val, b.index, b.size);
+	if (right_stack(a, b, val) && right_place)
+		return (2);
+	else if (right_stack(a, b, val) && !right_place)
+		return (1);
+	return (0);
+}
+
+void	calc_lbl_arr(stack a, stack b, int *arr)
 {
 	int	i;
-	int	dig;
-	int	size;
-	
-	dig = 9;
-	i = 0;
-	size = b->size;
-	while (dig > 0)
-	{
-		while (i++ < size)
-		{
-			//print_stacks(*a, *b);
-			//printf("a: %d - i: %d\n", get_digit(b->index[0], digit), i);
-			if (dig == get_digit(b->index[0], digit))
-				p(b, a);
-			else
-				r(b);
-		}
-		i = 0;
-		dig--;
-		size = b->size;
-	}
+
+	i = -1;
+	while (++i < a.size + b.size)
+		arr[i] = calc_label(a, b, i);
 }
 
-void	sort(stack *a, stack *b)
+int	lbls_are_better(int *old, int *new, int size)
 {
-	push_to_b(a, b, 1);
-	//print_stacks(*a, *b);
-	push_to_a(a, b, 2);
-	//print_stacks(*a, *b);
-	push_to_b(a, b, 3);
-	//print_stacks(*a, *b);
+	return (arr_sum(new, size) > arr_sum(old, size));
+}
+
+void sort(stack *a, stack *b)
+{
+	int	*lbl_arr;
+	
+	split_stacks(a, b);
+	lbl_arr = init_lbl_arr(a, b);
+	calc_lbl_arr(*a, *b, lbl_arr);
+	printf("Label array: ");
+	print_arr(lbl_arr, a->size + b->size);
+	
 }
