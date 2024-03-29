@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 14:00:33 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:01:43 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	wsrp_in_a(stack a, stack b, int val)
 	val_ind = find_ind(b.index, b.size, val);
 	dist = piv_ind - val_ind;
 	if (val_ind > piv_ind)
-		...
+		//...
 	return (dist == a.pivot - val);
 }
 
