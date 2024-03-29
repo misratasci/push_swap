@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 12:58:14 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:00:33 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	right_stack(stack a, stack b, int val)
 	return ((in_stack(a, val) && val > b.pivot) || (in_stack(b, val) && val < b.pivot));
 }
 
-static int	right_place_in_a(stack a, int val)
+static int	rsrp_in_a(stack a, int val)
 {
 	int	piv_ind;
 	int	val_ind;
@@ -79,7 +79,7 @@ static int	right_place_in_a(stack a, int val)
 	return (dist == a.pivot - val);
 }
 
-static int	right_place_in_b(stack b, int val)
+static int	rsrp_in_b(stack b, int val)
 {
 	int	piv_ind;
 	int	val_ind;
@@ -93,12 +93,28 @@ static int	right_place_in_b(stack b, int val)
 	return (dist == b.pivot - val);
 }
 
+static int	wsrp_in_a(stack a, stack b, int val)
+{
+	int	piv_ind;
+	int	val_ind;
+	int	dist;
+
+	piv_ind = find_ind(a.index, a.size, a.pivot);
+	val_ind = find_ind(b.index, b.size, val);
+	dist = piv_ind - val_ind;
+	if (val_ind > piv_ind)
+		...
+	return (dist == a.pivot - val);
+}
+
 int	right_place(stack a, stack b, int val)
 {
 	if (in_stack(a, val) && right_stack(a, b, val))
-		return (right_place_in_a(a, val));
+		return (rsrp_in_a(a, val));
 	if (in_stack(b, val) && right_stack(a, b, val))
-		return (right_place_in_b(b, val));
+		return (rsrp_in_b(b, val));
+	if (in_stack(a, val) && !right_stack(a, b, val))
+		return (wsrp_in_a(a, b, val));
 	return (0);
 }
 
