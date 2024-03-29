@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 11:32:24 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/29 11:35:02 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int	in_stack(stack a, int val)
 int	right_stack(stack a, stack b, int val)
 {
 	return ((in_stack(a, val) && val > b.pivot) || (in_stack(b, val) && val < b.pivot));
+}
+
+int	right_place(stack a, stack b, int val)
+{
+	
 }
 
 /*
