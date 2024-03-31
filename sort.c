@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/31 10:49:34 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/31 16:57:47 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,9 @@ int	right_place(stack a, stack b, int val)
 0: wrong stack, wrong place
 1: right stack, wrong place
 2: right stack, right place
-3: wrong stack, right place, can reach with rr (in first half of stack)
-4: wrong stack, right place, can reach with rrr (in second half)
+3: wrong stack, right place
 -1: is pivot a
 -2: is pivot b
-
-(3 ve 4ü sonra yaparım kafam basmadı)
 */
 int	calc_label(stack a, stack b, int val)
 {
@@ -141,9 +138,31 @@ void	calc_lbl_arr(stack a, stack b, int *arr)
 		arr[i] = calc_label(a, b, i);
 }
 
-int	lbls_are_better(int *old, int *new, int size)
+void	swap_check(stack *a, stack *b, int *lbl_arr, char st)
 {
-	return (arr_sum(new, size) > arr_sum(old, size));
+	int	old_sum;
+	int	new_sum;
+
+	old_sum = arr_sum(lbl_arr, a->size + b->size);
+	if (st == 'a')
+		s_sim(a);
+	else if (st == 'b')
+		s_sim(b);
+	calc_lbl_arr(*a, *b, lbl_arr);
+	new_sum = arr_sum(lbl_arr, a->size + b->size);
+	if (st == 'a')
+	{
+		s_sim(a);
+		if (new_sum > old_sum)
+			s(a);
+	}
+	else if (st == 'b')
+	{
+		s_sim(b);
+		if (new_sum > old_sum)
+			s(b);
+	}
+	calc_lbl_arr(*a, *b, lbl_arr);
 }
 
 void sort(stack *a, stack *b)
@@ -151,9 +170,14 @@ void sort(stack *a, stack *b)
 	int	*lbl_arr;
 	
 	split_stacks(a, b);
+	print_stacks(*a, *b);
 	lbl_arr = init_lbl_arr(a, b);
 	calc_lbl_arr(*a, *b, lbl_arr);
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
-	
+	swap_check(a, b, lbl_arr, 'a');
+	swap_check(a, b, lbl_arr, 'b');
+	print_stacks(*a, *b);
+	printf("Label array: ");
+	print_arr(lbl_arr, a->size + b->size);
 }

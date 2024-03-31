@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/29 12:59:02 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/31 11:39:34 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int		distance(int val1, int val2, int *a, int size);
 int		ind_distance(int ind1, int ind2, int size);
 void	r_sim(stack *a);
 void	revr_sim(stack *a);
+
+//ops sim
+void	s_sim(stack *a);
+void	ss_sim(stack *a, stack *b);
+void	p_sim(stack *a, stack *b);
+void	r_sim(stack *a);
+void	rr_sim(stack *a, stack *b);
+void	revr_sim(stack *a);
+void	revrr_sim(stack *a, stack *b);
 
 //main
 void	split_stacks(stack *a, stack *b);
