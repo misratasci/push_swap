@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/31 10:43:41 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/31 10:49:34 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ static int	rp_in_b(stack a, stack b, int val)
 
 int	right_place(stack a, stack b, int val)
 {
-	if (in_stack(a, val))
+	if (val > b.pivot)
 		return (rp_in_a(a, b, val));
-	if (in_stack(b, val))
+	else if (val < b.pivot)
 		return (rp_in_b(a, b, val));
 	return (0);
 }
@@ -127,6 +127,8 @@ int	calc_label(stack a, stack b, int val)
 		return (2);
 	else if (right_stack(a, b, val) && !right_place(a, b, val))
 		return (1);
+	else if (!right_stack(a, b, val) && right_place(a, b, val))
+		return (3);
 	return (0);
 }
 
@@ -151,7 +153,6 @@ void sort(stack *a, stack *b)
 	split_stacks(a, b);
 	lbl_arr = init_lbl_arr(a, b);
 	calc_lbl_arr(*a, *b, lbl_arr);
-	printf("wsrp a : %d\n", wsrp_in_a(*a, *b, 32));
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
 	
