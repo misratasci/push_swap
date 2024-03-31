@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/31 16:57:47 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/31 18:14:56 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,31 +138,32 @@ void	calc_lbl_arr(stack a, stack b, int *arr)
 		arr[i] = calc_label(a, b, i);
 }
 
-void	swap_check(stack *a, stack *b, int *lbl_arr, char st)
+int	calc_profit_a(stack *a, stack *b, int *lbl_arr, void (*f)(stack *a), void (*revf)(stack *a))
 {
 	int	old_sum;
 	int	new_sum;
 
 	old_sum = arr_sum(lbl_arr, a->size + b->size);
-	if (st == 'a')
-		s_sim(a);
-	else if (st == 'b')
-		s_sim(b);
+	f(a);
 	calc_lbl_arr(*a, *b, lbl_arr);
 	new_sum = arr_sum(lbl_arr, a->size + b->size);
-	if (st == 'a')
-	{
-		s_sim(a);
-		if (new_sum > old_sum)
-			s(a);
-	}
-	else if (st == 'b')
-	{
-		s_sim(b);
-		if (new_sum > old_sum)
-			s(b);
-	}
+	revf(a);
 	calc_lbl_arr(*a, *b, lbl_arr);
+	return (new_sum - old_sum);
+}
+
+int	calc_profit_b(stack *a, stack *b, int *lbl_arr, void (*f)(stack *a), void (*revf)(stack *a))
+{
+	int	old_sum;
+	int	new_sum;
+
+	old_sum = arr_sum(lbl_arr, a->size + b->size);
+	f(b);
+	calc_lbl_arr(*a, *b, lbl_arr);
+	new_sum = arr_sum(lbl_arr, a->size + b->size);
+	revf(b);
+	calc_lbl_arr(*a, *b, lbl_arr);
+	return (new_sum - old_sum);
 }
 
 void sort(stack *a, stack *b)
@@ -175,8 +176,10 @@ void sort(stack *a, stack *b)
 	calc_lbl_arr(*a, *b, lbl_arr);
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
-	swap_check(a, b, lbl_arr, 'a');
-	swap_check(a, b, lbl_arr, 'b');
+	if (calc_profit_a(a, b, lbl_arr, s_sim, s_sim) > 0)
+		s(a);
+	else if (calc_profit_b(a, b, lbl_arr, s_sim, s_sim) > 0)
+		s(b);
 	print_stacks(*a, *b);
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
