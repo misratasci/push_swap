@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/31 18:14:56 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/03/31 19:24:51 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void sort(stack *a, stack *b)
 		s(a);
 	else if (calc_profit_b(a, b, lbl_arr, s_sim, s_sim) > 0)
 		s(b);
+	calc_lbl_arr(*a, *b, lbl_arr);
 	print_stacks(*a, *b);
 	printf("Label array: ");
 	print_arr(lbl_arr, a->size + b->size);
