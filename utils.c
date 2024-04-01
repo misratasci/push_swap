@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/02 00:13:25 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/02 00:51:07 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ static int	*sorted_init(stack *a)
 	int	*sorted;
 	
 	sorted = (int*)malloc(sizeof(int) * a->size);
-	i = 0;
 	curr_min = find_min(a->arr, a->size);
-	sorted[i] = curr_min;
-	while (++i < a->size)
+	sorted[0] = curr_min;
+	i = 1;
+	while (i < a->size)
+	{
 		sorted[i] = find_next_min(a->arr, a->size, sorted[i - 1]);
+		i++;
+	}
 	return (sorted);
 }
 
@@ -36,7 +39,8 @@ static void	index_init(stack *a)
 	i = -1;
 	while (++i < a->size)
 		a->index[i] = find_ind(sorted, a->size, a->arr[i]);
-	free(sorted);
+	if (sorted)
+		free(sorted);
 }
 
 int	listlen(char **l)
@@ -54,6 +58,8 @@ void	free_list(char **l)
 	int	i;
 
 	i = 0;
+	if (!l)
+		return ;
 	while(l[i])
 		free(l[i++]);
 	free(l);

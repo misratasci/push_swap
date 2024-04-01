@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/02 00:10:17 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/02 01:18:52 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@ int get_digit(int a, int digit)
 {
 	int	i;
 	int	res;
+	int	dig_count;
+	int tmp_a;
 
+	if (digit < 1)
+		return (-1);
+	dig_count = 0;
+	tmp_a = a;
+	while (tmp_a != 0)
+	{
+		tmp_a /= 10;
+		dig_count++;
+	}
+	if (digit > dig_count)
+		return (0);
 	i = 0;
 	while (i < digit)
 	{
@@ -36,15 +49,16 @@ void	push_to_b(stack *a, stack *b, int digit)
 	dig = 0;
 	i = 0;
 	size = a->size;
-	while (dig < 10)
+	while (dig <= 9)
 	{
-		while (i++ < size)
+		while (i < size)
 		{
 			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
 			if (dig == get_digit(a->index[0], digit))
 				p(a, b);
 			else
 				r(a);
+			i++;
 		}
 		i = 0;
 		dig++;
@@ -60,16 +74,17 @@ void	push_to_a(stack *a, stack *b, int digit)
 	dig = 9;
 	i = 0;
 	size = b->size;
-	while (dig > 0)
+	while (dig >= 0)
 	{
-		while (i++ < size)
+		while (i < size)
 		{
 			//print_stacks(*a, *b);
-			//printf("a: %d - i: %d\n", get_digit(b->index[0], digit), i);
+			//printf("a: %d, i: %d, dig: %d\n", get_digit(b->index[0], digit), i, dig);
 			if (dig == get_digit(b->index[0], digit))
 				p(b, a);
 			else
 				r(b);
+			i++;
 		}
 		i = 0;
 		dig--;
@@ -82,8 +97,8 @@ void	sort(stack *a, stack *b)
 	push_to_b(a, b, 1);
 	print_stacks(*a, *b);
 	push_to_a(a, b, 2);
-	merge_stacks(a, b);
+	//merge_stacks(a, b);
 	print_stacks(*a, *b);
-	//push_to_b(a, b, 3);
-	//print_stacks(*a, *b);
+	push_to_b(a, b, 3);
+	print_stacks(*a, *b);
 }

@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/26 16:59:05 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/02 01:18:34 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,46 +57,48 @@ static void	p_for_ind(stack *a, stack *b)
 	
 	tmp = (int *)malloc(sizeof(int) * (b->size));
 	tmp[0] = a->index[0];
-	if (b->size - 1 > 0)
-	{
+	if (b->size - 1 > 0 && b->index)
 		copy_arr_until(tmp + 1, b->index, b->size - 1);
+	if (b->index)
 		free(b->index);
-	}
 	b->index = (int *)malloc(sizeof(int) * (b->size));
 	copy_arr_until(b->index, tmp, b->size);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	tmp = (int *)malloc(sizeof(int) * (a->size));
 	copy_arr_until(tmp, a->index + 1, a->size);
-	free(a->index);
+	if (a->index)
+		free(a->index);
 	a->index = (int *)malloc(sizeof(int) * (a->size));
 	copy_arr_until(a->index, tmp, a->size);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 }
 
 void	p(stack *a, stack *b)
 {
 	int *tmp;
-	
-	if (a->size == 0)
-		return ;
+
 	tmp = (int *)malloc(sizeof(int) * (b->size + 1));
 	tmp[0] = a->arr[0];
-	if (b->size > 0)
-	{
+	if (b->size > 0 && b->arr)
 		copy_arr_until(tmp + 1, b->arr, b->size);
+	if (b->arr)
 		free(b->arr);
-	}
 	b->arr = (int *)malloc(sizeof(int) * (b->size + 1));
 	copy_arr_until(b->arr, tmp, b->size + 1);
 	b->size++;
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	tmp = (int *)malloc(sizeof(int) * (a->size - 1));
 	copy_arr_until(tmp, a->arr + 1, a->size - 1);
-	free(a->arr);
+	if (a->arr)
+		free(a->arr);
 	a->arr = (int *)malloc(sizeof(int) * (a->size - 1));
 	copy_arr_until(a->arr, tmp, a->size - 1);
 	a->size--;
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	p_for_ind(a, b);
 	write(1, "p", 1);
 	write(1, &b->name, 1);
