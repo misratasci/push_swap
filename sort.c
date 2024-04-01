@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/03/31 19:24:51 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:53:38 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ int	right_place(stack a, stack b, int val)
 
 /*
 0: wrong stack, wrong place
-1: right stack, wrong place
-2: right stack, right place
-3: wrong stack, right place
+1: wrong stack, right place
+2: right stack, wrong place
+3: right stack, right place
 -1: is pivot a
 -2: is pivot b
 */
@@ -121,11 +121,11 @@ int	calc_label(stack a, stack b, int val)
 	if (val == b.pivot)
 		return (-2);
 	if (right_stack(a, b, val) && right_place(a, b, val))
-		return (2);
-	else if (right_stack(a, b, val) && !right_place(a, b, val))
-		return (1);
-	else if (!right_stack(a, b, val) && right_place(a, b, val))
 		return (3);
+	else if (right_stack(a, b, val) && !right_place(a, b, val))
+		return (2);
+	else if (!right_stack(a, b, val) && right_place(a, b, val))
+		return (1);
 	return (0);
 }
 
