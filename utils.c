@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/01 17:58:10 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/01 18:13:39 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,16 @@ static void	index_init(stack *a)
 		a->index[i] = find_ind(sorted, a->size, a->arr[i]);
 }
 
+static void	dists_init(stack *a)
+{
+	int	i;
+	
+	a->dists = (int *)malloc(sizeof(int) * a->size);
+	i = -1;
+	while (++i < a->size)
+		a->dists[i] = 0;
+}
+
 stack	initialize_stack_a(int argc, char **argv)
 {
 	stack	a;
@@ -85,6 +95,7 @@ stack	initialize_stack_a(int argc, char **argv)
 	else
 		parse_args(&a, argc, argv);
 	index_init(&a);
+	dists_init(&a);
 	a.pivot = a.size - 1;
 	return (a);
 }
