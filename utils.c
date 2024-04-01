@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/01 17:53:18 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:58:10 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,22 @@ static void	parse_args(stack *a, int argc, char **argv)
 		a->arr[i] = ft_atoi(argv[i + 1]);
 }
 
-static void	sorted_init(stack *a)
-{
-	int curr_min;
-	int	i;
-
-	a->sorted = (int*)malloc(sizeof(int) * a->size);
-	i = 0;
-	curr_min = find_min(a->arr, a->size);
-	a->sorted[i] = curr_min;
-	while (++i < a->size)
-		a->sorted[i] = find_next_min(a->arr, a->size, a->sorted[i - 1]);
-}
-
 static void	index_init(stack *a)
 {
 	int	i;
+	int	curr_min;
+	int	*sorted;
 
+	sorted = (int*)malloc(sizeof(int) * a->size);
+	i = 0;
+	curr_min = find_min(a->arr, a->size);
+	sorted[i] = curr_min;
+	while (++i < a->size)
+		sorted[i] = find_next_min(a->arr, a->size, sorted[i - 1]);
 	a->index = (int*)malloc(sizeof(int) * a->size);
 	i = -1;
 	while (++i < a->size)
-		a->index[i] = find_ind(a->sorted, a->size, a->arr[i]);
+		a->index[i] = find_ind(sorted, a->size, a->arr[i]);
 }
 
 stack	initialize_stack_a(int argc, char **argv)
@@ -89,7 +84,6 @@ stack	initialize_stack_a(int argc, char **argv)
 		parse_arg(&a, argv);
 	else
 		parse_args(&a, argc, argv);
-	sorted_init(&a);
 	index_init(&a);
 	a.pivot = a.size - 1;
 	return (a);
@@ -102,7 +96,6 @@ stack	initialize_stack_b(stack a)
 	b.name = 'b';
 	b.size = 0;
 	b.arr = NULL;
-	b.sorted = NULL;
 	b.index = NULL;
 	b.pivot = a.pivot / 2;
 	return (b);
