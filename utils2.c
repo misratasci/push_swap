@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 15:03:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/03 16:10:52 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,27 @@ void	sort_3_inc(stack *a)
 	}
 }
 
-/*
-void	sort_5_inc(stack *a, stack *b)
+void	sort_4_inc(stack *a, stack *b)
 {
 	p(a, b);
-	p(a, b);
 	sort_3_inc(a);
-	
+	if (b->arr[0] < a->arr[0])
+		p(b, a);
+	else if (a->arr[0] < b->arr[0] && b->arr[0] < a->arr[1])
+	{
+		r(a);
+		p(b, a);
+		revr(a);
+	}
+	else if (a->arr[1] < b->arr[0] && b->arr[0] < a->arr[2])
+	{
+		revr(a);
+		p(b, a);
+		r(a);
+	}
+	else if (b->arr > a->arr[2])
+	{
+		p(b, a);
+		r(a);
+	}
 }
-*/
