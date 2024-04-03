@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/02 00:51:07 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/03 13:22:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	index_init(stack *a)
 	int	i;
 	int	*sorted;
 
+	a->index = (int*)malloc(sizeof(int) * a->capacity);
 	sorted = sorted_init(a);
 	i = -1;
 	while (++i < a->size)
@@ -65,18 +66,19 @@ void	free_list(char **l)
 	free(l);
 }
 
-stack	initialize_stack_a(int argc, char **argv)
+stack	initialize_stack_a(int argc, char **argv, int capacity)
 {
 	stack	a;
 	int		i;
 	char	**list;
 
 	a.name = 'a';
+	a.capacity = capacity;
+	a.arr = (int *)malloc(sizeof(int) * a.capacity);
 	if (argc == 2)
 	{
 		list = ft_split(argv[1], ' ');
 		a.size = listlen(list);
-		a.arr = (int*)malloc(sizeof(int) * a.size);
 		i = -1;
 		while (++i < a.size)
 			a.arr[i] = ft_atoi(list[i]);
@@ -85,28 +87,24 @@ stack	initialize_stack_a(int argc, char **argv)
 	else
 	{
 		a.size = argc - 1;
-		a.arr = (int*)malloc(sizeof(int) * a.size);
 		i = -1;
 		while (++i < a.size)
 			a.arr[i] = ft_atoi(argv[i + 1]);
 	}
-	a.index = (int*)malloc(sizeof(int) * a.size);
-	i = 0;
-	while(i < a.size)
-		a.index[i++] = 0;
 	index_init(&a);
 	a.pivot = a.size - 1;
 	return (a);
 }
 
-stack	initialize_stack_b(stack a)
+stack	initialize_stack_b(stack a, int capacity)
 {
 	stack	b;
 	
 	b.name = 'b';
+	b.capacity = capacity;
 	b.size = 0;
-	b.arr = NULL;
-	b.index = NULL;
+	b.arr = (int *)malloc(sizeof(int) * b.capacity);
+	b.index = (int *)malloc(sizeof(int) * b.capacity);
 	b.pivot = a.pivot / 2;
 	return (b);
 }
@@ -123,7 +121,7 @@ void	copy_arr_until(int *dst, int *src, int n)
 {
 	int		i;
 
-	if (!dst && !src)
+	if (!dst || !src)
 		return ;
 	if (dst <= src)
 	{

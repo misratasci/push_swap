@@ -6,29 +6,33 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/02 01:20:15 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/03 13:31:01 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	count_digits(int a)
+{
+	int res;
+	
+	res = 0;
+	while (a != 0)
+	{
+		a /= 10;
+		res++;
+	}
+	return (res);
+}
+
 int get_digit(int a, int digit)
 {
 	int	i;
 	int	res;
-	int	dig_count;
-	int tmp_a;
 
 	if (digit < 1)
 		return (-1);
-	dig_count = 0;
-	tmp_a = a;
-	while (tmp_a != 0)
-	{
-		tmp_a /= 10;
-		dig_count++;
-	}
-	if (digit > dig_count)
+	if (digit > count_digits(a))
 		return (0);
 	i = 0;
 	while (i < digit)
@@ -48,9 +52,9 @@ void	push_to_b(stack *a, stack *b, int digit)
 	
 	dig = 0;
 	i = 0;
-	size = a->size;
 	while (dig <= 9)
 	{
+		size = a->size;
 		while (i < size)
 		{
 			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
@@ -73,9 +77,9 @@ void	push_to_a(stack *a, stack *b, int digit)
 	
 	dig = 9;
 	i = 0;
-	size = b->size;
 	while (dig >= 0)
 	{
+		size = b->size;
 		while (i < size)
 		{
 			//print_stacks(*a, *b);
@@ -97,8 +101,7 @@ void	sort(stack *a, stack *b)
 	push_to_b(a, b, 1);
 	print_stacks(*a, *b);
 	push_to_a(a, b, 2);
-	//merge_stacks(a, b);
 	print_stacks(*a, *b);
-	//push_to_b(a, b, 3);
-	//print_stacks(*a, *b);
+	push_to_b(a, b, 3);
+	print_stacks(*a, *b);
 }
