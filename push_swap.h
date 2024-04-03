@@ -6,7 +6,7 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 00:16:00 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:25:52 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct stack
 	int		*index;
 	int		pivot;
 	int		capacity;
+	int		max_bit;
 } stack;
 
 //libft
@@ -36,7 +37,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //utils
 stack	initialize_stack_a(int argc, char **argv);
-stack	initialize_stack_b(stack a, int capacity);
+stack	initialize_stack_b(stack a);
 void	clean_stack(stack *a);
 void	copy_arr_until(int *dst, int *src, int n);
 int		find_min(int *a, int size);
@@ -73,12 +74,13 @@ void	rr_sim(stack *a, stack *b);
 void	revr_sim(stack *a);
 void	revrr_sim(stack *a, stack *b);
 
+
+//main
+void	merge_stacks(stack *a, stack *b);
+void	ft_checks(char **stack, int arg_size);
+
 //sort
 void	sort(stack *a, stack *b);
 int 	get_digit(int a, int digit);
 int		*get_digit_arr(stack a, int digit);
-
-//main
-void	merge_stacks(stack *a, stack *b);
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 23:58:51 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:12:47 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,8 @@ int	main(int argc, char **argv)
 		ft_checks((argv + 1), (argc - 2));
 	
 	a = initialize_stack_a(argc, argv);
-	b = initialize_stack_b(a, 500);
+	b = initialize_stack_b(a);
 
-	
 	if (check_if_sorted(a.arr, a.size) || a.size == 1)
 	{
 		clean_stack(&a);
