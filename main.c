@@ -6,7 +6,7 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 23:03:47 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/03 23:58:51 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int argc, char **argv)
 	else
 		ft_checks((argv + 1), (argc - 2));
 	
-	a = initialize_stack_a(argc, argv, 500);
+	a = initialize_stack_a(argc, argv);
 	b = initialize_stack_b(a, 500);
 
 	

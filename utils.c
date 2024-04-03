@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 15:46:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/04 00:16:47 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,32 +129,96 @@ static void	free_list(char **l)
 	free(l);
 }
 
+void sortArray(int* array, int size) {
+    int i = 0, j, temp;
+    while (i < size - 1) {
+        j = i + 1;
+        while (j < size) {
+            if (array[i] > array[j]) {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
+}
 
-stack	initialize_stack_a(int argc, char **argv, int capacity)
+int* findRanks(int* array, int size) {
+    // Clone the original array.
+    int* clonedArray = (int*)malloc(size * sizeof(int));
+    int* rankArray = (int*)malloc(size * sizeof(int));
+    int i = 0, j;
+    
+    while (i < size) {
+        clonedArray[i] = array[i];
+        i++;
+    }
+
+    sortArray(clonedArray, size);
+    i = 0;
+    while (i < size) {
+        j = 0;
+        while (j < size) {
+            if (array[i] == clonedArray[j]) {
+                rankArray[i] = j;
+                break; // Found the rank, no need to continue inner loop.
+            }
+            j++;
+        }
+        i++;
+    }
+    free(clonedArray);
+
+    return rankArray;
+}
+
+int *ft_atoi_array(list, size)
+{
+	int i;
+	int *arr;
+	
+	i = -1;
+	arr = (int *)malloc(sizeof(int) * size);
+	while (++i < size)
+		arr[i] = ft_atoi(list[i]);
+	return (arr);
+}
+
+int *ft_index_the_list(char **list, int size)
+{
+	int** arr = ft_atoi_array(list, size);
+	
+}
+
+void	split_and_stack(char *av, stack *stack)
+{
+	char	**list;
+	char	*tmp;
+	
+	list = ft_split(av, ' ');
+	if (!list)
+		return ;
+	stack->size = listlen(list);
+	ft_checks(list, stack->size);
+	stack->arr = (int *)malloc(sizeof(int) * stack->size);
+	fill_with_zeroes(stack->arr, stack->size);
+	stack->arr = ft_index_the_list(list, stack->size);
+}
+
+
+stack	initialize_stack_a(int argc, char **argv)
 {
 	stack	a;
 	int		i;
-	char	**list;
 	int		arr_valid;
 
 	arr_valid = 1;
 	a.name = 'a';
-	a.capacity = capacity;
-	a.arr = (int *)malloc(sizeof(int) * a.capacity);
-	fill_with_zeroes(a.arr, a.capacity);
+	a.capacity = argc - 1;
 	if (argc == 2)
-	{
-		list = ft_split(argv[1], ' ');
-		a.size = listlen(list);
-		i = -1;
-		while (++i < a.size)
-		{
-			if (!is_num(list[i]) || !num_valid(list[i]))
-				arr_valid = 0;
-			a.arr[i] = ft_atoi(list[i]);
-		}
-		free_list(list);
-	}
+		split_and_stack(argv[1], &a);
 	else
 	{
 		a.size = argc - 1;
@@ -165,12 +229,6 @@ stack	initialize_stack_a(int argc, char **argv, int capacity)
 				arr_valid = 0;
 			a.arr[i] = ft_atoi(argv[i + 1]);
 		}
-	}
-	if (!arr_valid || check_for_dups(a.arr, a.size))
-	{
-		write(0, "Error\n", 6);
-		clean_stack(&a);
-		exit(0);
 	}
 	index_init(&a);
 	a.pivot = a.size - 1;
