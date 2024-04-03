@@ -6,24 +6,11 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 13:31:01 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:26:30 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	count_digits(int a)
-{
-	int res;
-	
-	res = 0;
-	while (a != 0)
-	{
-		a /= 10;
-		res++;
-	}
-	return (res);
-}
 
 int get_digit(int a, int digit)
 {
@@ -96,12 +83,19 @@ void	push_to_a(stack *a, stack *b, int digit)
 	}
 }
 
+void	push_all_to_a(stack *a, stack *b)
+{
+	while (b->size > 0)
+		p(b, a);
+}
+
 void	sort(stack *a, stack *b)
 {
 	push_to_b(a, b, 1);
-	print_stacks(*a, *b);
+	//print_stacks(*a, *b);
 	push_to_a(a, b, 2);
-	print_stacks(*a, *b);
+	//print_stacks(*a, *b);
 	push_to_b(a, b, 3);
-	print_stacks(*a, *b);
+	//print_stacks(*a, *b);
+	push_all_to_a(a, b);
 }

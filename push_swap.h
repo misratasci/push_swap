@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 13:11:53 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/03 15:30:53 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,21 @@ typedef struct stack
 //libft
 int		ft_atoi(const char *str);
 char	**ft_split(char const *s, char c);
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //utils
 stack	initialize_stack_a(int argc, char **argv, int capacity);
 stack	initialize_stack_b(stack a, int capacity);
-void	clean_stack(stack a);
+void	clean_stack(stack *a);
 void	copy_arr_until(int *dst, int *src, int n);
-int		find_max(int *a, int size);
 int		find_min(int *a, int size);
-//int		find_middle(int *a, int size);
 int		find_next_min(int *a, int size, int prev_min);
-int		find_next_max(int *a, int size, int prev_max);
 int		find_ind(int *a, int size, int value);
-int		count_val(int *arr, int size, int val);
-int		arr_sum(int *arr, int size);
-int		all_els_eq(int *arr, int size);
-int		all_els_neg(int *arr, int size);
 void	sort_3_inc(stack *a);
-void	sort_3_dec(stack *a);
-void	sort_3_inc_dig(stack *a, int digit);
-void	sort_3_dec_dig(stack *a, int digit);
+int		check_if_sorted(int *a, int size);
+int		count_digits(int a);
 void	print_arr(int *a, int size); //sil
 void	print_stacks(stack a, stack b); //sil
 
