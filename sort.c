@@ -3,185 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 19:15:37 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/01 17:53:38 by mitasci          ###   ########.fr       */
+/*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
+/*   Updated: 2024/04/03 23:16:56 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	split_from_front(stack *a, stack *b)
+int get_digit(int a, int digit)
 {
-	while (b->size < a->size)
-	{
-		if (a->index[0] == a->pivot)
-				r(a);
-		else
-			p(a, b);
-	}
-}
-
-static void	split_from_back(stack *a, stack *b)
-{
-	while (b->size < a->size)
-	{
-		revr(a);
-		if (a->index[0] == a->pivot)
-			revr(a);
-		p(a, b);
-	}
-}
-
-void	split_stacks(stack *a, stack *b)
-{
-	printf("Pivot A: %d, Pivot B: %d\n", a->pivot, b->pivot);
-	if (find_ind(a->index, a->size, b->pivot) <= a->size / 2)
-		split_from_front(a, b);
-	else
-		split_from_back(a, b);
-}
-
-int	*init_lbl_arr(stack *a, stack *b)
-{
-	int	*lbl_arr;
 	int	i;
+	int	res;
 
-	lbl_arr = (int *)malloc(sizeof(int) * (a->size + b->size));
-	i = -1;
-	while (++i < a->size + b->size)
-		lbl_arr[i] = 0;
-	return (lbl_arr);
-}
-
-int	in_stack(stack a, int val)
-{
-	return (find_ind(a.index, a.size, val) != -1);
-}
-
-int	right_stack(stack a, stack b, int val)
-{
-	return ((in_stack(a, val) && val > b.pivot) || (in_stack(b, val) && val < b.pivot));
-}
-
-static int	rp_in_a(stack a, stack b, int val)
-{
-	int	piv_ind;
-	int	val_ind;
-	int	dist;
-
-	piv_ind = find_ind(a.index, a.size, a.pivot);
-	val_ind = find_ind(a.index, a.size, val);
-	if (in_stack(b, val))
-		val_ind = find_ind(b.index, b.size, val);
-	dist = piv_ind - val_ind;
-	if (val_ind > piv_ind)
-		dist = piv_ind - val_ind + a.size;
-	return (dist == a.pivot - val);
-}
-
-static int	rp_in_b(stack a, stack b, int val)
-{
-	int	piv_ind;
-	int	val_ind;
-	int	dist;
-
-	piv_ind = find_ind(b.index, b.size, b.pivot);
-	val_ind = find_ind(b.index, b.size, val);
-	if (in_stack(a, val))
-		val_ind = find_ind(a.index, a.size, val);
-	dist = (-1) * (piv_ind - val_ind);
-	if (piv_ind > val_ind)
-		dist = piv_ind - val_ind + b.size;
-	return (dist == b.pivot - val);
-}
-
-int	right_place(stack a, stack b, int val)
-{
-	if (val > b.pivot)
-		return (rp_in_a(a, b, val));
-	else if (val < b.pivot)
-		return (rp_in_b(a, b, val));
-	return (0);
-}
-
-/*
-0: wrong stack, wrong place
-1: wrong stack, right place
-2: right stack, wrong place
-3: right stack, right place
--1: is pivot a
--2: is pivot b
-*/
-int	calc_label(stack a, stack b, int val)
-{
-	if (val == a.pivot)
+	if (digit < 1)
 		return (-1);
-	if (val == b.pivot)
-		return (-2);
-	if (right_stack(a, b, val) && right_place(a, b, val))
-		return (3);
-	else if (right_stack(a, b, val) && !right_place(a, b, val))
-		return (2);
-	else if (!right_stack(a, b, val) && right_place(a, b, val))
-		return (1);
-	return (0);
+	if (digit > count_digits(a))
+		return (0);
+	i = 0;
+	while (i < digit)
+	{
+		res = a % 10;
+		a /= 10;
+		i++;
+	}
+	return (res);
 }
 
-void	calc_lbl_arr(stack a, stack b, int *arr)
+void	push_to_b(stack *a, stack *b, int digit)
 {
 	int	i;
-
-	i = -1;
-	while (++i < a.size + b.size)
-		arr[i] = calc_label(a, b, i);
-}
-
-int	calc_profit_a(stack *a, stack *b, int *lbl_arr, void (*f)(stack *a), void (*revf)(stack *a))
-{
-	int	old_sum;
-	int	new_sum;
-
-	old_sum = arr_sum(lbl_arr, a->size + b->size);
-	f(a);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	new_sum = arr_sum(lbl_arr, a->size + b->size);
-	revf(a);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	return (new_sum - old_sum);
-}
-
-int	calc_profit_b(stack *a, stack *b, int *lbl_arr, void (*f)(stack *a), void (*revf)(stack *a))
-{
-	int	old_sum;
-	int	new_sum;
-
-	old_sum = arr_sum(lbl_arr, a->size + b->size);
-	f(b);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	new_sum = arr_sum(lbl_arr, a->size + b->size);
-	revf(b);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	return (new_sum - old_sum);
-}
-
-void sort(stack *a, stack *b)
-{
-	int	*lbl_arr;
+	int	dig;
+	int	size;
 	
-	split_stacks(a, b);
-	print_stacks(*a, *b);
-	lbl_arr = init_lbl_arr(a, b);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	printf("Label array: ");
-	print_arr(lbl_arr, a->size + b->size);
-	if (calc_profit_a(a, b, lbl_arr, s_sim, s_sim) > 0)
-		s(a);
-	else if (calc_profit_b(a, b, lbl_arr, s_sim, s_sim) > 0)
-		s(b);
-	calc_lbl_arr(*a, *b, lbl_arr);
-	print_stacks(*a, *b);
-	printf("Label array: ");
-	print_arr(lbl_arr, a->size + b->size);
+	dig = 0;
+	i = 0;
+	while (dig <= 9)
+	{
+		size = a->size;
+		while (i < size)
+		{
+			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
+			if (dig == get_digit(a->index[0], digit))
+				p(a, b);
+			else
+				r(a);
+			i++;
+		}
+		i = 0;
+		dig++;
+	}
+}
+
+void	push_to_a(stack *a, stack *b, int digit)
+{
+	int	i;
+	int	dig;
+	int	size;
+	
+	dig = 9;
+	i = 0;
+	while (dig >= 0)
+	{
+		size = b->size;
+		while (i < size)
+		{
+			//print_stacks(*a, *b);
+			//printf("a: %d, i: %d, dig: %d\n", get_digit(b->index[0], digit), i, dig);
+			if (dig == get_digit(b->index[0], digit))
+				p(b, a);
+			else
+				r(b);
+			i++;
+		}
+		i = 0;
+		dig--;
+		size = b->size;
+	}
+}
+
+void	push_all_to_a(stack *a, stack *b)
+{
+	while (b->size > 0)
+		p(b, a);
+}
+
+void	sort(stack *a, stack *b)
+{
+	push_to_b(a, b, 1);
+	//print_stacks(*a, *b);
+	push_to_a(a, b, 2);
+	//print_stacks(*a, *b);
+	push_to_b(a, b, 3);
+	//print_stacks(*a, *b);
+	push_all_to_a(a, b);
 }
