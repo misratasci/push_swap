@@ -6,7 +6,7 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 01:12:47 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 02:44:36 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,38 @@ void	ft_checks(char **stack, int arg_size)
 	is_sorted(stack, arg_size);
 }
 
+void	max_bit_calculation(stack *a) {
+    int max_value = 0;
+    int i = 0;
+    while (i < a->size) {
+        if (abs(a->arr[i]) > max_value)
+            max_value = abs(a->arr[i]);
+        i++;
+    }
+    a->max_bit = 0;
+    while (max_value >> a->max_bit)
+        a->max_bit++;
+}
+
+void	radix_sort(stack *a, stack *b) {
+    int i, j, num;
+    max_bit_calculation(a);
+    i = 0;
+    while (i < a->max_bit) {
+        j = a->size;
+        while (j--) {
+            num = a->arr[0];
+            if (((num >> i) & 1) == 1)
+                r(a);
+            else
+                p(a, b);
+        }
+        while (b->size)
+            p(b, a);
+        i++;
+    }
+}
+
 int	main(int argc, char **argv)
 {
 	stack a;
@@ -147,7 +179,7 @@ int	main(int argc, char **argv)
 		sort_3_inc(&a);
 		return (0);
 	}
-	sort(&a, &b);
+	radix_sort(&a, &b);
 
 	//print_stacks(a, b);
 	
