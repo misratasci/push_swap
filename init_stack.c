@@ -3,39 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 04:12:10 by aerbosna          #+#    #+#             */
-/*   Updated: 2024/04/04 04:46:29 by aerbosna         ###   ########.fr       */
+/*   Created: 2024/04/04 04:12:10 by  mitasci          #+#    #+#             */
+/*   Updated: 2024/04/04 06:04:22 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	fake_sort(int *array, int size)
+static int	*clone_and_sort_array(int *array, int size)
 {
+	int	*cloned_array;
 	int	i;
-	int	j;
-	int	temp;
 
 	i = 0;
-	j = 0;
-	temp = 0;
-	while (i < size - 1)
+	cloned_array = (int *)malloc(size * sizeof(int));
+	while (i < size)
 	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (array[i] > array[j])
-			{
-				temp = array[i];
-				array[i] = array[j];
-				array[j] = temp;
-			}
-			j++;
-		}
+		cloned_array[i] = array[i];
 		i++;
 	}
+	fake_sort(cloned_array, size);
+	return (cloned_array);
 }
 
 static int	*find_index(int *array, int size)
@@ -45,16 +35,8 @@ static int	*find_index(int *array, int size)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	cloned_array = (int *)malloc(size * sizeof(int));
+	cloned_array = clone_and_sort_array(array, size);
 	rank_array = (int *)malloc(size * sizeof(int));
-	while (i < size)
-	{
-		cloned_array[i] = array[i];
-		i++;
-	}
-	fake_sort(cloned_array, size);
 	i = 0;
 	while (i < size)
 	{
@@ -70,7 +52,7 @@ static int	*find_index(int *array, int size)
 		}
 		i++;
 	}
-	free (cloned_array);
+	free(cloned_array);
 	return (rank_array);
 }
 
@@ -87,43 +69,40 @@ static int	*ft_atoi_array(char **list, int size)
 	return (arr);
 }
 
-static void	split_and_t_stack(int ac, char **av, t_stack *t_stack, int label)
+static void	split_and_stack(int ac, char **av, t_stack *stack, int label)
 {
-	char	**list;
-	int		*arr;
+	char	**tmp;
 
-	list = NULL;
-	arr = NULL;
 	if (label == 2)
 	{
-		list = ft_split(av[1], ' ');
-		t_stack->size = listlen(list);
-		ft_checks(list, t_stack->size);
-		t_stack->arr = (int *)malloc(sizeof(int) * t_stack->size);
-		fill_with_zeroes(t_stack->arr, t_stack->size);
-		arr = ft_atoi_array(list, t_stack->size);
-		t_stack->arr = find_index(arr, t_stack->size);
-		free_list(list);
+		tmp = ft_split(av[1], ' ');
+		stack->size = listlen(tmp);
+		ft_checks(tmp, stack->size);
+		stack->arr = (int *)malloc(sizeof(int) * stack->size);
+		fill_with_zeroes(stack->arr, stack->size);
+		stack->tmp_arr = ft_atoi_array(tmp, stack->size);
+		stack->arr = find_index(stack->tmp_arr, stack->size);
+		free_list(tmp);
 	}
 	else
 	{
-		t_stack->size = (ac - 1);
-		t_stack->arr = (int *)malloc(sizeof(int) * t_stack->size);
-		fill_with_zeroes(t_stack->arr, t_stack->size);
-		arr = ft_atoi_array(av, t_stack->size);
-		t_stack->arr = find_index(arr, t_stack->size);
+		stack->size = (ac - 1);
+		stack->arr = (int *)malloc(sizeof(int) * stack->size);
+		fill_with_zeroes(stack->arr, stack->size);
+		stack->tmp_arr = ft_atoi_array(av, stack->size);
+		stack->arr = find_index(stack->tmp_arr, stack->size);
 	}
 }
 
-void	initialize_t_stack(int ac, char **av, char flag, t_stack *a, t_stack *b)
+void	initialize_stack(int ac, char **av, t_stack *a, t_stack *b)
 {
-	if (flag == 'a')
+	if (b == NULL)
 	{
 		a->name = 'a';
 		if (ac == 2)
-			split_and_t_stack(ac, av, a, 2);
+			split_and_stack(ac, av, a, 2);
 		else
-			split_and_t_stack(ac, av, a, 3);
+			split_and_stack(ac, av, a, 3);
 	}
 	else
 	{	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 04:37:43 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 06:08:38 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	listlen(char **l)
 	return (i);
 }
 
-void	clean_t_stack(t_stack *a, t_stack *b)
+void	clean_stack(t_stack *a, t_stack *b)
 {
 	free(a->arr);
 	free(b->arr);

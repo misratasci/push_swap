@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 04:45:52 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 06:58:20 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_stack
 	int		*arr;
 	int		*index;
 	int		max_bit;
+	int		*tmp_arr;
 }	t_stack;
 
 //libft_funcs
@@ -46,7 +47,7 @@ void	ft_error(void);
 int		listlen(char **l);
 void	free_list(char **l);
 void	ft_int_max(char *str);
-void	clean_t_stack(t_stack *a, t_stack *b);
+void	clean_stack(t_stack *a, t_stack *b);
 void	fill_with_zeroes(int *a, int size);
 
 //checks
@@ -56,8 +57,9 @@ void	ft_checks(char **t_stack, int arg_size);
 void	is_sorted(char **t_stack, int arg_size);
 void	has_duplicates(char **t_stack, int arg_size);
 
-//init_t_stack
-void	initialize_t_stack(int ac, char **av, char flag, t_stack *a, t_stack *b);
+//init_stack
+void	initialize_stack(int ac, char **av, t_stack *a, t_stack *b);
+void	fake_sort(int *array, int size);
 
 //operations
 void	s(t_stack *a);
@@ -71,8 +73,8 @@ void	revr(t_stack *a);
 void	revrr(t_stack *a, t_stack *b);
 
 //sort
-void	sort_3_inc(t_stack *a);
 void	max_bit_calculation(t_stack *a);
 void	radix_sort(t_stack *a, t_stack *b);
+void	lil_sort(t_stack *a, t_stack *b);
 
 #endif

@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_stack2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 06:54:08 by mitasci          ###   ########.fr       */
+/*   Created: 2024/04/04 05:59:07 by  mitasci          #+#    #+#             */
+/*   Updated: 2024/04/04 06:04:25 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error(void)
+void	fake_sort(int *array, int size)
 {
-	write(1, "Error\n", 6);
-	exit(0);
-}
+	int	i;
+	int	j;
+	int	temp;
 
-int	main(int argc, char **argv)
-{
-	t_stack	a;
-	t_stack	b;
-
-	if (argc <= 1)
-		return (0);
-	else
-		ft_checks((argv + 1), (argc - 2));
-	initialize_stack(argc, argv, &a, NULL);
-	initialize_stack(0, NULL, &a, &b);
-	if (check_if_sorted(a.arr, a.size) || a.size == 1)
-		clean_stack(&a, &b);
-	if (a.size <= 5)
-		lil_sort(&a, &b);
-	radix_sort(&a, &b);
-	clean_stack(&a, &b);
+	i = 0;
+	j = 0;
+	temp = 0;
+	while (i < size - 1)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (array[i] > array[j])
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }

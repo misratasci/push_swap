@@ -3,7 +3,7 @@ CC 		= 	cc
 CFLAGS 	= 	-Wall -Wextra -Werror
 RM 		= 	rm -rf
 SRCS 	= 	main.c utils.c utils2.c operations.c operations2.c sort.c \
-			libft_funcs.c libft_funcs2.c checks.c init_stack.c \
+			libft_funcs.c libft_funcs2.c checks.c init_stack.c init_stack2.c \
 
 all:
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS)

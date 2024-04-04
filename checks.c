@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 04:12:02 by aerbosna          #+#    #+#             */
-/*   Updated: 2024/04/04 04:37:43 by aerbosna         ###   ########.fr       */
+/*   Created: 2024/04/04 04:12:02 by  mitasci          #+#    #+#             */
+/*   Updated: 2024/04/04 06:04:18 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

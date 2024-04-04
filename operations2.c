@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:19:35 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/04 04:37:43 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 06:04:42 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

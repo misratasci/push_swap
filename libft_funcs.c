@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: mitasci <mitasci@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 04:12:13 by aerbosna          #+#    #+#             */
-/*   Updated: 2024/04/04 04:12:14 by aerbosna         ###   ########.fr       */
+/*   Created: 2024/04/04 04:12:13 by  mitasci          #+#    #+#             */
+/*   Updated: 2024/04/04 06:04:28 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
