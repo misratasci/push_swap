@@ -6,96 +6,74 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 23:16:56 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 04:37:43 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_digit(int a, int digit)
+void	max_bit_calculation(t_stack *a)
 {
+	int	max_value;
 	int	i;
-	int	res;
 
-	if (digit < 1)
-		return (-1);
-	if (digit > count_digits(a))
-		return (0);
 	i = 0;
-	while (i < digit)
+	max_value = 0;
+	while (i < a->size)
 	{
-		res = a % 10;
-		a /= 10;
+		if (abs(a->arr[i]) > max_value)
+			max_value = abs(a->arr[i]);
 		i++;
 	}
-	return (res);
+	a->max_bit = 0;
+	while (max_value >> a->max_bit)
+		a->max_bit++;
 }
 
-void	push_to_b(stack *a, stack *b, int digit)
+void	radix_sort(t_stack *a, t_stack *b)
 {
 	int	i;
-	int	dig;
-	int	size;
-	
-	dig = 0;
+	int	j;
+	int	num;
+
+	max_bit_calculation(a);
 	i = 0;
-	while (dig <= 9)
+	while (i < a->max_bit)
 	{
-		size = a->size;
-		while (i < size)
+		j = a->size;
+		while (j--)
 		{
-			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
-			if (dig == get_digit(a->index[0], digit))
-				p(a, b);
-			else
+			num = a->arr[0];
+			if (((num >> i) & 1) == 1)
 				r(a);
-			i++;
-		}
-		i = 0;
-		dig++;
-	}
-}
-
-void	push_to_a(stack *a, stack *b, int digit)
-{
-	int	i;
-	int	dig;
-	int	size;
-	
-	dig = 9;
-	i = 0;
-	while (dig >= 0)
-	{
-		size = b->size;
-		while (i < size)
-		{
-			//print_stacks(*a, *b);
-			//printf("a: %d, i: %d, dig: %d\n", get_digit(b->index[0], digit), i, dig);
-			if (dig == get_digit(b->index[0], digit))
-				p(b, a);
 			else
-				r(b);
-			i++;
+				p(a, b);
 		}
-		i = 0;
-		dig--;
-		size = b->size;
+		while (b->size)
+			p(b, a);
+		i++;
 	}
 }
 
-void	push_all_to_a(stack *a, stack *b)
+void	sort_3_inc(t_stack *a)
 {
-	while (b->size > 0)
-		p(b, a);
-}
-
-void	sort(stack *a, stack *b)
-{
-	push_to_b(a, b, 1);
-	//print_stacks(*a, *b);
-	push_to_a(a, b, 2);
-	//print_stacks(*a, *b);
-	push_to_b(a, b, 3);
-	//print_stacks(*a, *b);
-	push_all_to_a(a, b);
+	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+		return ;
+	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
+	{
+		s(a);
+		r(a);
+	}
+	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
+		s(a);
+	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
+		revr(a);
+	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
+		r(a);
+	else
+	{
+		s(a);
+		revr(a);
+	}
+	exit (0);
 }

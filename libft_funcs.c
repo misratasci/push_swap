@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   libft_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 21:21:34 by mitasci           #+#    #+#             */
-/*   Updated: 2023/12/22 14:34:14 by mitasci          ###   ########.fr       */
+/*   Created: 2024/04/04 04:12:13 by aerbosna          #+#    #+#             */
+/*   Updated: 2024/04/04 04:12:14 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static size_t	count_words(const char *s, char c)
 {
@@ -84,4 +84,9 @@ char	**ft_split(char const *s, char c)
 	}
 	arr[word] = 0;
 	return (arr);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= 48 && c <= 57);
 }

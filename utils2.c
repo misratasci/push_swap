@@ -6,109 +6,73 @@
 /*   By: aerbosna <aerbosna@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 20:24:07 by aerbosna         ###   ########.fr       */
+/*   Updated: 2024/04/04 04:37:43 by aerbosna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_min(int *a, int size)
+void	fill_with_zeroes(int *a, int size)
 {
 	int	i;
-	int	min;
 
-	if (!a || size < 1)
-		return (-1);
-	min = a[0];
 	i = -1;
 	while (++i < size)
-	{
-		if (a[i] < min)
-			min = a[i];
-	}
-	return (min);
+		a[i] = 0;
 }
 
-int	find_ind(int *a, int size, int value)
+int	listlen(char **l)
 {
 	int	i;
 
-	if (!a || size < 1)
-		return (-1);
-	i = -1;
-	while (++i < size)
-	{
-		if (a[i] == value)
-			return (i);
-	}
-	return (-1);
-}
-
-int	find_next_min(int *a, int size, int prev_min)
-{
-	int	i;
-	int	res;
-
-	if (!a || size < 2)
-		return (-1);
 	i = 0;
-	while (a[i] <= prev_min)
+	while (l[i])
 		i++;
-	if (i >= size)
-		return (-1);
-	res = a[i];
-	while (i < size)
-	{
-		if (a[i] < res && a[i] > prev_min)
-			res = a[i];
-		i++;
-	}
-	return (res);
+	return (i);
 }
 
-void	sort_3_inc(stack *a)
+void	clean_t_stack(t_stack *a, t_stack *b)
 {
-	if (a->arr[0] < a->arr[1] && a->arr[1] < a->arr[2])
+	free(a->arr);
+	free(b->arr);
+	exit(0);
+}
+
+void	free_list(char **l)
+{
+	int	i;
+
+	i = 0;
+	if (!l)
 		return ;
-	else if (a->arr[0] < a->arr[2] && a->arr[2] < a->arr[1])
-	{
-		s(a);
-		r(a);
-	}
-	else if (a->arr[1] < a->arr[0] && a->arr[0] < a->arr[2])
-		s(a);
-	else if (a->arr[2] < a->arr[0] && a->arr[0] < a->arr[1])
-		revr(a);
-	else if (a->arr[1] < a->arr[2] && a->arr[2] < a->arr[0])
-		r(a);
-	else
-	{
-		s(a);
-		revr(a);
-	}
+	while (l[i])
+		free(l[i++]);
+	free(l);
 }
 
-void	sort_4_inc(stack *a, stack *b)
+void	ft_int_max(char *str)
 {
-	p(a, b);
-	sort_3_inc(a);
-	if (b->arr[0] < a->arr[0])
-		p(b, a);
-	else if (a->arr[0] < b->arr[0] && b->arr[0] < a->arr[1])
+	int	i;
+	int	minus;
+
+	i = 0;
+	minus = 0;
+	if (str[0] == '-')
 	{
-		r(a);
-		p(b, a);
-		revr(a);
+		minus = 1;
+		i++;
 	}
-	else if (a->arr[1] < b->arr[0] && b->arr[0] < a->arr[2])
+	if ((ft_strlen(str) > 10 && minus == 0)
+		|| (ft_strlen(str) > 11 && minus == 1))
+		ft_error();
+	if ((ft_strlen(str) == 10 && minus == 0)
+		|| (ft_strlen(str) == 11 && minus == 1))
 	{
-		revr(a);
-		p(b, a);
-		r(a);
-	}
-	else if (*b->arr > a->arr[2])
-	{
-		p(b, a);
-		r(a);
+		if (str[i] > '2' || str[i + 1] > '1' || str[i + 2] > '4'
+			|| str[i + 3] > '7' || str[i + 4] > '4' || str[i + 5] > '8'
+			|| str[i + 6] > '3' || str[i + 7] > '6' || str[i + 8] > '4'
+			|| (str[i + 9] > '7' && minus == 0)
+			|| (str[i + 9] > '8' && minus == 1))
+			ft_error();
 	}
 }
