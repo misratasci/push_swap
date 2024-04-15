@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 21:18:01 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:36:53 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	copy_arr_until(int *dst, int *src, int n)
 
 int	count_digits(int a)
 {
-	int res;
-	
+	int	res;
+
 	res = 0;
 	while (a != 0)
 	{
@@ -74,23 +74,4 @@ int	count_digits(int a)
 		res++;
 	}
 	return (res);
-}
-
-void	print_arr(int *a, int size) //bunu sonradan sil
-{
-	int i = -1;
-	printf("{");
-	while (++i < size)
-		printf("%d, ", a[i]);
-	printf("}\n");
-}
-
-void	print_stacks(t_stack a, t_stack b) //bunu da sil
-{
-	printf("Stack A:\n");
-	print_arr(a.arr, a.size);
-	//print_arr(a.index, a.size);
-	printf("Stack B:\n");
-	print_arr(b.arr, b.size);
-	//print_arr(b.index, b.size);
 }

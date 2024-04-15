@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:47:09 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:55:12 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,13 @@ void	push_all_to_a(t_stack *a, t_stack *b)
 
 void	sort(t_stack *a, t_stack *b)
 {
+	int digits;
+	
+	digits = count_digits(find_max(a->index, a->size));
 	push_to_b(a, b, 1);
-	push_to_a(a, b, 2);
-	push_to_b(a, b, 3);
+	if (digits >= 1)
+		push_to_a(a, b, 2);
+	if (digits >= 2)
+		push_to_b(a, b, 3);
 	push_all_to_a(a, b);
 }

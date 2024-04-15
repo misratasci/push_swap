@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 21:43:21 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:43:46 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 
 //checks
-
 void	ft_checks(char **t_stack, int arg_size);
 
 //stack_init
@@ -52,13 +51,11 @@ int		find_min(int *a, int size);
 int		find_max(int *a, int size);
 int		find_ind(int *a, int size, int value);
 int		find_next_min(int *a, int size, int prev_min);
+int		is_sorted_dec(int *a, int size);
 
 //sort_basic
 void	sort_3_inc(t_stack *a);
 void	sort_5_inc(t_stack *a, t_stack *b);
-
-void	print_arr(int *a, int size); //sil
-void	print_stacks(t_stack a, t_stack b); //sil
 
 //operations
 void	s(t_stack *a);
@@ -74,6 +71,6 @@ void	sort(t_stack *a, t_stack *b);
 int		get_digit(int a, int digit);
 
 //main
-void    ft_error();
+void	ft_error(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:34:31 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:39:02 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,24 @@ void	int_limit(char **a, int arg_size)
 {
 	size_t	len;
 	int		i;
-	
+
 	i = 0;
 	while (i < arg_size)
 	{
 		len = ft_strlen(a[i]);
 		if ((len > 10 && a[i][0] != '-') || (a[i][0] == '-' && len > 11))
 			ft_error();
-		if (len == 10 && a[i][0] != '-' && ft_strncmp(a[i], "2147483647", 10) > 0)
+		if (len == 10 && a[i][0] != '-' &&
+			ft_strncmp(a[i], "2147483647", 10) > 0)
 			ft_error();
-		if (len == 11 && a[i][0] == '-' && ft_strncmp(a[i], "-2147483648", 11) > 0)
+		if (len == 11 && a[i][0] == '-' &&
+			ft_strncmp(a[i], "-2147483648", 11) > 0)
 			ft_error();
 		i++;
 	}
 }
 
-static void is_sorted(char **a, int arg_size)
+static void	is_sorted(char **a, int arg_size)
 {
 	int	i;
 	int	sorted;

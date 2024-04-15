@@ -6,16 +6,16 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 21:41:25 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:37:50 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_error()
+void	ft_error(void)
 {
-    write(1, "Error\n", 6);
-    exit(0);
+	write(1, "Error\n", 6);
+	exit(0);
 }
 
 int	main(int argc, char **argv)
@@ -37,6 +37,5 @@ int	main(int argc, char **argv)
 		sort_5_inc(&a, &b);
 	else
 		sort(&a, &b);
-	//print_stacks(a, b);
 	clean_stacks(&a, &b);
 }

@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:17:50 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:24:15 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:43:20 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,18 @@ int	find_next_min(int *a, int size, int prev_min)
 		i++;
 	}
 	return (res);
+}
+
+int	is_sorted_dec(int *a, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (a[i] < a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
