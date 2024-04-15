@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:45:47 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:48:44 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 21:34:44 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ss(t_stack *a, t_stack *b)
 
 void	p(t_stack *a, t_stack *b)
 {
-	if (b->size + 1 > b->capacity)
-		return ;
 	if (b->arr && b->index && b->size > 0)
 	{
 		copy_arr_until(b->arr + 1, b->arr, b->size);

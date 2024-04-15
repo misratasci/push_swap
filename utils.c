@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:25 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:47:21 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 21:18:01 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,6 @@ void	copy_arr_until(int *dst, int *src, int n)
 		while (i-- > 0)
 			dst[i] = src[i];
 	}
-}
-
-int	check_if_sorted(int *a, int size)
-{
-	int	i;
-
-	i = -1;
-	while (++i < size - 1)
-	{
-		if (a[i] > a[i + 1])
-			return (0);
-	}
-	return (1);
 }
 
 int	count_digits(int a)

@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:29:53 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:46:20 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 21:32:17 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	index_init(t_stack *a)
 	int	i;
 	int	*sorted;
 
-	a->index = (int *)malloc(sizeof(int) * a->capacity);
-	fill_with_zeroes(a->index, a->capacity);
+	a->index = (int *)malloc(sizeof(int) * a->size);
 	sorted = sorted_init(a);
 	i = -1;
 	while (++i < a->size)
@@ -45,72 +44,56 @@ static void	index_init(t_stack *a)
 		free(sorted);
 }
 
-t_stack	initialize_stack_a(int argc, char **argv, int capacity)
+t_stack	initialize_stack_a(int argc, char **argv)
 {
 	t_stack	a;
 	int		i;
 	char	**list;
-	int		arr_valid;
 
-	arr_valid = 1;
 	a.name = 'a';
-	a.capacity = capacity;
-	a.arr = (int *)malloc(sizeof(int) * a.capacity);
-	fill_with_zeroes(a.arr, a.capacity);
 	if (argc == 2)
 	{
 		list = ft_split(argv[1], ' ');
 		a.size = listlen(list);
+		a.arr = (int *)malloc(sizeof(int) * a.size);
 		i = -1;
 		while (++i < a.size)
-		{
-			if (!is_num(list[i]) || !num_valid(list[i]))
-				arr_valid = 0;
 			a.arr[i] = ft_atoi(list[i]);
-		}
 		free_list(list);
 	}
 	else
 	{
 		a.size = argc - 1;
+		a.arr = (int *)malloc(sizeof(int) * a.size);
 		i = -1;
 		while (++i < a.size)
-		{
-			if (!is_num(argv[i + 1]) || !num_valid(argv[i + 1]))
-				arr_valid = 0;
 			a.arr[i] = ft_atoi(argv[i + 1]);
-		}
-	}
-	if (!arr_valid || check_for_dups(a.arr, a.size))
-	{
-		write(0, "Error\n", 6);
-		clean_stack(&a);
-		exit(0);
 	}
 	index_init(&a);
-	a.pivot = a.size - 1;
 	return (a);
 }
 
-t_stack	initialize_stack_b(t_stack a, int capacity)
+t_stack	initialize_stack_b(t_stack a)
 {
 	t_stack	b;
 
 	b.name = 'b';
-	b.capacity = capacity;
 	b.size = 0;
-	b.arr = (int *)malloc(sizeof(int) * b.capacity);
-	fill_with_zeroes(b.arr, b.capacity);
-	b.index = (int *)malloc(sizeof(int) * b.capacity);
-	fill_with_zeroes(b.index, b.capacity);
-	b.pivot = a.pivot / 2;
+	b.arr = (int *)malloc(sizeof(int) * a.size);
+	fill_with_zeroes(b.arr, a.size);
+	b.index = (int *)malloc(sizeof(int) * a.size);
+	fill_with_zeroes(b.index, a.size);
 	return (b);
 }
 
-void	clean_stack(t_stack *a)
+void	clean_stacks(t_stack *a, t_stack *b)
 {
 	if (a->arr)
 		free(a->arr);
 	if (a->index)
 		free(a->index);
+	if (b->arr)
+		free(b->arr);
+	if (b->index)
+		free(b->index);
 }

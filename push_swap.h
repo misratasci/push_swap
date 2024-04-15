@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:45:29 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 21:43:21 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct s_stack
 	int		size;
 	int		*arr;
 	int		*index;
-	int		pivot;
-	int		capacity;
 }	t_stack;
 
 //libft
@@ -33,23 +31,22 @@ char	**ft_split(char const *s, char c);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strchr(const char *s, int c);
 
 //checks
-int		num_valid(char *a);
-int		is_num(char *a);
-int		check_for_dups(int *a, int size);
+
+void	ft_checks(char **t_stack, int arg_size);
 
 //stack_init
-t_stack	initialize_stack_a(int argc, char **argv, int capacity);
-t_stack	initialize_stack_b(t_stack a, int capacity);
-void	clean_stack(t_stack *a);
+t_stack	initialize_stack_a(int argc, char **argv);
+t_stack	initialize_stack_b(t_stack a);
+void	clean_stacks(t_stack *a, t_stack *b);
 
 //utils
 void	fill_with_zeroes(int *a, int size);
 int		listlen(char **l);
 void	free_list(char **l);
 void	copy_arr_until(int *dst, int *src, int n);
-int		check_if_sorted(int *a, int size);
 int		count_digits(int a);
 int		find_min(int *a, int size);
 int		find_max(int *a, int size);
@@ -75,5 +72,8 @@ void	revrr(t_stack *a, t_stack *b);
 //sort
 void	sort(t_stack *a, t_stack *b);
 int		get_digit(int a, int digit);
+
+//main
+void    ft_error();
 
 #endif

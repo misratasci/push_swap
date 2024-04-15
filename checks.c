@@ -6,120 +6,89 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 21:03:58 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:07:10 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	num_valid(char *a)
-{
-	size_t	len;
-
-	len = ft_strlen(a);
-	if ((len > 10 && a[0] != '-') || (a[0] == '-' && len > 11))
-		return (0);
-	if (len == 10 && a[0] != '-' && ft_strncmp(a, "2147483647", 10) > 0)
-		return (0);
-	if (len == 11 && a[0] == '-' && ft_strncmp(a, "-2147483648", 11) > 0)
-		return (0);
-	return (1);
-}
-
-int	is_num(char *a)
-{
-	int	i;
-
-	i = 0;
-	if (a[0] == '-')
-		i++;
-	while (a[i])
-	{
-		if (!ft_isdigit(a[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_for_dups(int *a, int size)
+void	all_digit(char **t_stack, int arg_size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < size)
+	while (i < arg_size)
 	{
-		j = i + 1;
-		while (j < size)
+		j = 0;
+		while (t_stack[i][j])
 		{
-			if (a[i] == a[j])
-				return (1);
+			if (t_stack[i][0] == '-')
+				continue ;
+			else if (!ft_isdigit(t_stack[i][j]))
+				ft_error();
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }
 
-
-/*
-void	all_digit(char **t_stack, int arg_size)
-{
-	int	i;
-
-	i = -1;
-	while (arg_size >= 0)
-	{
-		while (t_stack[arg_size][++i])
-		{
-			if (t_stack[arg_size][i] == '-' && i == 0)
-				continue ;
-			else if (!ft_isdigit(t_stack[arg_size][i]))
-				ft_error();
-		}
-		arg_size--;
-		i = -1;
-	}
-}
-
-void	has_duplicates(char **t_stack, int arg_size)
+void	has_duplicates(char **a, int arg_size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i <= arg_size)
+	while (i < arg_size)
 	{
 		j = i + 1;
 		while (j < arg_size)
-			if (!ft_strcmp(t_stack[i], t_stack[j++]))
+		{
+			if (ft_strlen(a[i]) == ft_strlen(a[j]) && !ft_strncmp(a[i], a[j], ft_strlen(a[i])))
 				ft_error();
+			j++;
+		}
 		i++;
 	}
 }
 
-void	int_limit(char **t_stack, int arg_size)
+void	int_limit(char **a, int arg_size)
 {
-	while (arg_size >= 0)
+	size_t	len;
+	int		i;
+	
+	i = 0;
+	while (i < arg_size)
 	{
-		ft_int_max(t_stack[arg_size]);
-		arg_size--;
+		len = ft_strlen(a[i]);
+		if ((len > 10 && a[i][0] != '-') || (a[i][0] == '-' && len > 11))
+			ft_error();
+		if (len == 10 && a[i][0] != '-' && ft_strncmp(a[i], "2147483647", 10) > 0)
+			ft_error();
+		if (len == 11 && a[i][0] == '-' && ft_strncmp(a[i], "-2147483648", 11) > 0)
+			ft_error();
+		i++;
 	}
 }
 
-void	is_sorted(char **t_stack, int arg_size)
+static void is_sorted(char **a, int arg_size)
 {
 	int	i;
+	int	sorted;
 
-	i = arg_size;
-	while (--i >= 0)
+	if (arg_size == 1 && !ft_strchr(a[0], ' '))
+		exit(0);
+	i = 0;
+	sorted = 1;
+	while (i < arg_size - 1)
 	{
-		if (ft_atoi(t_stack[i]) > ft_atoi(t_stack[arg_size--]))
-			return ;
+		if (ft_atoi(a[i]) > ft_atoi(a[i + 1]))
+			sorted = 0;
+		i++;
 	}
-	exit(0);
+	if (sorted)
+		exit(0);
 }
 
 void	ft_checks(char **t_stack, int arg_size)
@@ -129,4 +98,3 @@ void	ft_checks(char **t_stack, int arg_size)
 	int_limit(t_stack, arg_size);
 	is_sorted(t_stack, arg_size);
 }
-*/
