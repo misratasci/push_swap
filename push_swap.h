@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 15:30:53 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:30:21 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		find_min(int *a, int size);
 int		find_next_min(int *a, int size, int prev_min);
 int		find_ind(int *a, int size, int value);
 void	sort_3_inc(stack *a);
+void	sort_5_inc(stack *a, stack *b);
 int		check_if_sorted(int *a, int size);
 int		count_digits(int a);
 void	print_arr(int *a, int size); //sil
