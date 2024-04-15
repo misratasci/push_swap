@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:55:12 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:40:55 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ int	get_digit(int a, int digit)
 	return (res);
 }
 
+int	get_max_of_dig(t_stack *a, int digit)
+{
+	int	i;
+	int	max;
+	int	dig;
+
+	i = 0;
+	max = 0;
+	while (i < a->size)
+	{
+		dig = get_digit(a->index[i], digit);
+		if (dig > max)
+			max = dig;
+		i++;
+	}
+	return (max);
+}
+
 void	push_to_b(t_stack *a, t_stack *b, int digit)
 {
 	int	i;
@@ -44,6 +62,10 @@ void	push_to_b(t_stack *a, t_stack *b, int digit)
 		size = a->size;
 		while (i < size)
 		{
+			//printf("digit: %d, dig: %d\n", digit, dig);
+			//print_stacks(*a, *b);
+			if (a->size == 0)
+				return ;
 			if (dig == get_digit(a->index[0], digit))
 				p(a, b);
 			else
@@ -61,13 +83,17 @@ void	push_to_a(t_stack *a, t_stack *b, int digit)
 	int	dig;
 	int	size;
 
-	dig = 9;
+	dig = get_max_of_dig(b, digit);
 	i = 0;
 	while (dig >= 0)
 	{
 		size = b->size;
 		while (i < size)
 		{
+			//printf("digit: %d, dig: %d\n", digit, dig);
+			//print_stacks(*a, *b);
+			if (b->size == 0)
+				return ;
 			if (dig == get_digit(b->index[0], digit))
 				p(b, a);
 			else
@@ -92,9 +118,9 @@ void	sort(t_stack *a, t_stack *b)
 	
 	digits = count_digits(find_max(a->index, a->size));
 	push_to_b(a, b, 1);
-	if (digits >= 1)
+	if (digits > 1)
 		push_to_a(a, b, 2);
-	if (digits >= 2)
+	if (digits > 2)
 		push_to_b(a, b, 3);
 	push_all_to_a(a, b);
 }

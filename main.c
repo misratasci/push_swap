@@ -6,11 +6,31 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:37:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:11:51 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	print_arr(int *a, int size) //bunu sonradan sil
+{
+	int i = -1;
+	printf("{");
+	while (++i < size)
+		printf("%d, ", a[i]);
+	printf("}\n");
+}
+
+void	print_stacks(t_stack a, t_stack b) //bunu da sil
+{
+	printf("Stack A:\n");
+	//print_arr(a.arr, a.size);
+	print_arr(a.index, a.size);
+	printf("Stack B:\n");
+	//print_arr(b.arr, b.size);
+	print_arr(b.index, b.size);
+}
+
 
 void	ft_error(void)
 {

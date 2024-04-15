@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:19:35 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 17:48:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:03:50 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,28 @@ void	revrr(t_stack *a, t_stack *b)
 	copy_arr_until(b->index + 1, b->index, b->size - 1);
 	b->index[0] = tmp;
 	write(1, "rrr\n", 4);
+}
+
+void	r_n(t_stack *a, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		r(a);
+		i++;
+	}
+}
+
+void	revr_n(t_stack *a, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		revr(a);
+		i++;
+	}
 }
