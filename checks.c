@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:07:10 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:30:46 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	all_digit(char **t_stack, int arg_size)
 		while (t_stack[i][j])
 		{
 			if (t_stack[i][0] == '-')
+			{
+				j++;
 				continue ;
+			}
 			else if (!ft_isdigit(t_stack[i][j]))
 				ft_error();
 			j++;
