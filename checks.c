@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:30:46 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:34:31 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	has_duplicates(char **a, int arg_size)
 		j = i + 1;
 		while (j < arg_size)
 		{
-			if (ft_strlen(a[i]) == ft_strlen(a[j]) && !ft_strncmp(a[i], a[j], ft_strlen(a[i])))
+			if (ft_atoi(a[i]) == ft_atoi(a[j]))
 				ft_error();
 			j++;
 		}
