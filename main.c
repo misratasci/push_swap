@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 16:54:38 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:48:09 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	stack a;
-	stack b;
-	
+	t_stack	a;
+	t_stack	b;
+
 	if (argc <= 1)
 		return (0);
-	a = initialize_stack_a(argc, argv, 500);
-	b = initialize_stack_b(a, 500);
-	
+	a = initialize_stack_a(argc, argv, argc - 1);
+	b = initialize_stack_b(a, argc - 1);
+
 	if (check_if_sorted(a.arr, a.size) || a.size == 1)
 	{
 		clean_stack(&a);

@@ -2,7 +2,7 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-SRCS = main.c utils.c utils2.c operations.c operations2.c sort.c \
+SRCS = main.c utils.c utils2.c operations.c operations2.c sort.c sort_basic.c checks.c stack_init.c\
 		libft/ft_atoi.c libft/ft_split.c libft/ft_isdigit.c libft/ft_strlen.c libft/ft_strncmp.c
 
 all:

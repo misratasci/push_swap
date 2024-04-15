@@ -6,13 +6,13 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:43:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/03 15:26:30 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:47:09 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_digit(int a, int digit)
+int	get_digit(int a, int digit)
 {
 	int	i;
 	int	res;
@@ -31,12 +31,12 @@ int get_digit(int a, int digit)
 	return (res);
 }
 
-void	push_to_b(stack *a, stack *b, int digit)
+void	push_to_b(t_stack *a, t_stack *b, int digit)
 {
 	int	i;
 	int	dig;
 	int	size;
-	
+
 	dig = 0;
 	i = 0;
 	while (dig <= 9)
@@ -44,7 +44,6 @@ void	push_to_b(stack *a, stack *b, int digit)
 		size = a->size;
 		while (i < size)
 		{
-			//printf("a: %d - i: %d\n", get_digit(a->index[0], digit), i);
 			if (dig == get_digit(a->index[0], digit))
 				p(a, b);
 			else
@@ -56,12 +55,12 @@ void	push_to_b(stack *a, stack *b, int digit)
 	}
 }
 
-void	push_to_a(stack *a, stack *b, int digit)
+void	push_to_a(t_stack *a, t_stack *b, int digit)
 {
 	int	i;
 	int	dig;
 	int	size;
-	
+
 	dig = 9;
 	i = 0;
 	while (dig >= 0)
@@ -69,8 +68,6 @@ void	push_to_a(stack *a, stack *b, int digit)
 		size = b->size;
 		while (i < size)
 		{
-			//print_stacks(*a, *b);
-			//printf("a: %d, i: %d, dig: %d\n", get_digit(b->index[0], digit), i, dig);
 			if (dig == get_digit(b->index[0], digit))
 				p(b, a);
 			else
@@ -83,19 +80,16 @@ void	push_to_a(stack *a, stack *b, int digit)
 	}
 }
 
-void	push_all_to_a(stack *a, stack *b)
+void	push_all_to_a(t_stack *a, t_stack *b)
 {
 	while (b->size > 0)
 		p(b, a);
 }
 
-void	sort(stack *a, stack *b)
+void	sort(t_stack *a, t_stack *b)
 {
 	push_to_b(a, b, 1);
-	//print_stacks(*a, *b);
 	push_to_a(a, b, 2);
-	//print_stacks(*a, *b);
 	push_to_b(a, b, 3);
-	//print_stacks(*a, *b);
 	push_all_to_a(a, b);
 }
