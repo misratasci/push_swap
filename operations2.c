@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:19:35 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 23:03:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:46:56 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,20 @@ void	revrr(t_stack *a, t_stack *b)
 	write(1, "rrr\n", 4);
 }
 
-void	r_n(t_stack *a, int n)
+int	get_max_of_dig(t_stack *a, int digit)
 {
 	int	i;
+	int	max;
+	int	dig;
 
 	i = 0;
-	while (i < n)
+	max = 0;
+	while (i < a->size)
 	{
-		r(a);
+		dig = get_digit(a->index[i], digit);
+		if (dig > max)
+			max = dig;
 		i++;
 	}
-}
-
-void	revr_n(t_stack *a, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		revr(a);
-		i++;
-	}
+	return (max);
 }

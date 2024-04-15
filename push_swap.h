@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:51 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 23:12:08 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:47:06 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	revr(t_stack *a);
 void	revrr(t_stack *a, t_stack *b);
 void	r_n(t_stack *a, int n);
 void	revr_n(t_stack *a, int n);
+int		get_max_of_dig(t_stack *a, int digit);
 
 //sort
 void	sort(t_stack *a, t_stack *b);
