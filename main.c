@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 23:46:00 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:59:07 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ int	main(int argc, char **argv)
 	else
 		sort(&a, &b);
 	clean_stacks(&a, &b);
+	system("leaks push_swap");
 }
