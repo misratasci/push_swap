@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/15 22:39:02 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/17 11:51:24 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static void	is_sorted(char **a, int arg_size)
 	int	i;
 	int	sorted;
 
-	if (arg_size == 1 && !ft_strchr(a[0], ' '))
-		exit(0);
 	i = 0;
 	sorted = 1;
 	while (i < arg_size - 1)
@@ -98,8 +96,21 @@ static void	is_sorted(char **a, int arg_size)
 
 void	ft_checks(char **t_stack, int arg_size)
 {
-	all_digit(t_stack, arg_size);
-	has_duplicates(t_stack, arg_size);
-	int_limit(t_stack, arg_size);
-	is_sorted(t_stack, arg_size);
+	char	**args;
+
+	if (arg_size == 1 && !ft_strchr(t_stack[0], ' '))
+		exit(0);
+	else if (arg_size == 1 && ft_strchr(t_stack[0], ' '))
+	{
+		args = ft_split(t_stack[0], ' ');
+		arg_size = listlen(args);
+	}
+	else
+		args = t_stack;
+	all_digit(args, arg_size);
+	has_duplicates(args, arg_size);
+	int_limit(args, arg_size);
+	is_sorted(args, arg_size);
+	if (args)
+		free_list(args);
 }

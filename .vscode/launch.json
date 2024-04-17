@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/misratasci/Desktop/push_swap",
-      "program": "/Users/misratasci/Desktop/push_swap/build/Debug/outDebug"
+      "cwd": "/Users/mitasci/Desktop/push_swap",
+      "program": "/Users/mitasci/Desktop/push_swap/build/Debug/outDebug"
     }
   ]
 }
