@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:19 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/16 15:08:23 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/17 12:03:59 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,4 @@ int	main(int argc, char **argv)
 		sort(&a, &b);
 	clean_stacks(&a, &b);
 }
+
