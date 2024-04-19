@@ -6,7 +6,7 @@
 /*   By: mitasci <mitasci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:28:30 by mitasci           #+#    #+#             */
-/*   Updated: 2024/04/17 12:05:50 by mitasci          ###   ########.fr       */
+/*   Updated: 2024/04/19 15:02:23 by mitasci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ static void	is_sorted(char **a, int arg_size)
 void	ft_checks(char **t_stack, int arg_size)
 {
 	char	**args;
-	if (arg_size == 1 && !ft_strchr(t_stack[0], ' '))
-		exit(0);
-	else if (arg_size == 1 && ft_strchr(t_stack[0], ' '))
+	if (arg_size == 1 && ft_strchr(t_stack[0], ' '))
 	{
 		args = ft_split(t_stack[0], ' ');
 		arg_size = listlen(args);
@@ -112,4 +110,6 @@ void	ft_checks(char **t_stack, int arg_size)
 	is_sorted(args, arg_size);
 	if (arg_size == 1 && ft_strchr(t_stack[0], ' '))
 		free_list(args);
+	if (arg_size == 1 && !ft_strchr(t_stack[0], ' '))
+		exit(0);
 }
